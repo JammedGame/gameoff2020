@@ -22,6 +22,7 @@ Assets/LocalTestingStuff*
 .localhistory/
 /LocalCache/
 /Compiler/
+/server/node_modules
 
 Assets/Resources/Localizations/*
 Assets/Resources/Localizations.meta
