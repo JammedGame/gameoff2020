@@ -8,6 +8,8 @@ public class CameraController : MonoBehaviour
 
     void LateUpdate()
     {
+        if (target == null) return;
+
         // rotate
         transform.rotation = target.rotation;
 

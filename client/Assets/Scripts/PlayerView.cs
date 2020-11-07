@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Communication;
 
 public class PlayerView : MonoBehaviour
 {
@@ -6,7 +7,12 @@ public class PlayerView : MonoBehaviour
     public float acceleration;
     public float speedFallOff = 0.5f;
 
-    private Vector3 currentVelocity = Vector3.zero;
+    public PlayerState State { get; set; }
+
+    private void Start()
+    {
+        transform.position = State.Position;
+    }
 
     private void Update()
     {
@@ -14,17 +20,19 @@ public class PlayerView : MonoBehaviour
         transform.Rotate(-Input.GetAxisRaw("Mouse Y"), Input.GetAxisRaw("Mouse X"), 0);
 
         // speed fall off
-        currentVelocity = Vector3.Lerp(currentVelocity, Vector3.zero, speedFallOff * Time.deltaTime);
+        var newVelocity = Vector3.Lerp(State.Velocity, Vector3.zero, speedFallOff * Time.deltaTime);
 
         // accelerate
         var v = Input.GetAxisRaw("Vertical");
         var h = Input.GetAxisRaw("Horizontal");
-        currentVelocity += (h * transform.right + v * transform.forward) * acceleration * Time.deltaTime;
+        newVelocity += (h * transform.right + v * transform.forward) * acceleration * Time.deltaTime;
 
         // clamp speed
-        Vector3.ClampMagnitude(currentVelocity, maxSpeed);
+        newVelocity = Vector3.ClampMagnitude(newVelocity, maxSpeed);
+        State.Velocity = newVelocity;
 
         // move
-        transform.position += currentVelocity;
+        var newPosition = State.Position + newVelocity * Time.deltaTime;
+        transform.position = State.Position = newPosition;
     }
 }
