@@ -9,9 +9,8 @@ public class SpectatorScript : MonoBehaviour
 
     public float acceleration;
 
-    public float speedFallOff = 10;
+    public float speedFallOff = 0.5f;
     private Vector3 currentSpeed = Vector3.zero;
-    public float smoothTime = 0.3F;
     
     private void FixedUpdate()
     {
@@ -23,34 +22,20 @@ public class SpectatorScript : MonoBehaviour
         // rotation.y += Input.GetAxis ("Mouse X");
         // rotation.x += -Input.GetAxis ("Mouse Y");
         // transform.eulerAngles = (Vector2)rotation * currentSpeed;
+        transform.Rotate(Input.GetAxisRaw("Mouse Y"), Input.GetAxisRaw("Mouse X"), 0);
 
-        Vector3 newSpeed = new Vector3(
-            Mathf.Clamp(currentSpeed.x + (acceleration * h * Time.deltaTime), -maxSpeed, maxSpeed), 
-            0, 
-            Mathf.Clamp(currentSpeed.z + acceleration * v * Time.deltaTime,-maxSpeed, maxSpeed)
-        );
+        // speed fall off
+        var speedFallOffThisTick = speedFallOff * Time.deltaTime;
+        currentSpeed *= 1 - speedFallOffThisTick;
 
-        if(v == 0) {
-            if(newSpeed.z > 0) {
-                newSpeed.z -= speedFallOff * Time.deltaTime;
-            } 
-            else if (newSpeed.z < 0) {
-                newSpeed.z += speedFallOff * Time.deltaTime; 
-            }
-        }
-        if(h == 0) {
-            if(newSpeed.x > 0) {
-                newSpeed.x -= speedFallOff * Time.deltaTime;
-            } 
-            else if (newSpeed.x < 0) {
-                newSpeed.x += speedFallOff * Time.deltaTime; 
-            }
-        }
-        currentSpeed = newSpeed;
+        // accelerate
+        currentSpeed += (h * transform.right + v * transform.forward) * acceleration * Time.deltaTime;
+
+        // clamp speed
+        Vector3.ClampMagnitude(currentSpeed, maxSpeed);
 
         // currentSpeed = new Vector3((currentSpeed.x + acceleration * h currentSpeed.x) % maxSpeed, 0, (currentSpeed.z * 0.2F * currentSpeed.z * v) % maxSpeed);
         // Debug.Log(h);
-        Vector3 targetPosition = transform.position + new Vector3(h, 0, v);
         transform.position += currentSpeed;
         
     }
