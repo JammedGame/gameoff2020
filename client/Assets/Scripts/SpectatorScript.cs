@@ -11,7 +11,7 @@ public class SpectatorScript : MonoBehaviour
     private void FixedUpdate()
     {
         // rotate
-        transform.Rotate(Input.GetAxisRaw("Mouse Y"), Input.GetAxisRaw("Mouse X"), 0);
+        transform.Rotate(-Input.GetAxisRaw("Mouse Y"), Input.GetAxisRaw("Mouse X"), 0);
 
         // speed fall off
         var speedFallOffThisTick = speedFallOff * Time.deltaTime;
@@ -27,6 +27,5 @@ public class SpectatorScript : MonoBehaviour
 
         // move
         transform.position += currentSpeed;
-        
     }
 }
