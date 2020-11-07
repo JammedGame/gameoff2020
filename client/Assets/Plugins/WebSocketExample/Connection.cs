@@ -35,7 +35,7 @@ public class Connection : MonoBehaviour
 		{
 			// Reading a plain text message
 			var message = System.Text.Encoding.UTF8.GetString(bytes);
-			Debug.Log("Received OnMessage! (" + bytes.Length + " bytes) " + message);
+			Debug.Log("Received Global State " + message);
 		};
 
 		// Keep sending messages at every 0.3s

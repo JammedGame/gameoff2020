@@ -9,6 +9,7 @@
       "sourceMap": true,
       "module": "commonjs",
       "esModuleInterop": true,
-      "outDir": "./build"
+      "outDir": "./build",
+      "experimentalDecorators": true
     }
 }

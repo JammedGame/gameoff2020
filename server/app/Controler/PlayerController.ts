@@ -2,6 +2,7 @@ import PlayerInfo from "../Model/Info/PlayerInfo";
 import PlayerState from "../Model/State/PlayerState";
 import GlobalState from "../Model/State/GlobalState";
 import SocketConnection from "../Server/SocketConnection";
+import { Deserialize, Serialize } from "cerialize";
 
 export default class PlayerController
 {
@@ -23,11 +24,13 @@ export default class PlayerController
     }
     public sendGlobalState(globalState: GlobalState): void
     {
-        this.socketConnection.send(globalState);
+        if (this.socketConnection?.open) {
+            this.socketConnection.send(Serialize(globalState));
+        }
     }
     private receiveState(data: any): void
     {
-        this.state = new PlayerState(data);
+        this.state = Deserialize(data, PlayerState);
         console.info('Received state - ', data);
     }
 }

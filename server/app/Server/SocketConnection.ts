@@ -21,6 +21,7 @@ export default class SocketConnection
     {
         this.open = false;
         this.connection = null;
+        console.info('Player has disconnected.');
     }
     private receive(data: string): void
     {

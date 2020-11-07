@@ -1,6 +1,8 @@
+import { autoserialize } from "cerialize";
+
 export default class ObjectiveState
 {
-    public affinity: number;
+    @autoserialize affinity: number;
     public constructor(data?: any)
     {
         this.affinity = 0;

@@ -26,12 +26,13 @@ export default class GameController
         if (found.length > 0) {
             found[0].startConnection(socketConnection);
         }
+        this.start(); // TEMP
     }
     public kill(): void
     {
         clearInterval(this.onTick.bind(this));
     }
-    public registerObjetiveController(objectiveController: ObjectiveController): void
+    public registerObjectiveController(objectiveController: ObjectiveController): void
     {
         this.objectiveController = objectiveController;
     }

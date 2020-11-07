@@ -4,6 +4,8 @@ import PlayerInfo from "../Model/Info/PlayerInfo";
 import PlayerController from "./PlayerController";
 import playersData from "../Data/TempPlayers.json";
 import SocketConnection from "../Server/SocketConnection";
+import ObjectiveController from "./ObjectiveController";
+import ObjectiveState from "../Model/State/ObjectiveState";
 
 export default class HostController
 {
@@ -26,6 +28,9 @@ export default class HostController
                 )
             );
         });
+        game.registerObjectiveController(
+            new ObjectiveController( new ObjectiveState() )
+        )
         this.games.push(game);
     }
     public onConnection(socketConnection: SocketConnection, id: string): void

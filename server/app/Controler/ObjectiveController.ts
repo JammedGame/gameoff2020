@@ -4,9 +4,9 @@ import ObjectiveState from "../Model/State/ObjectiveState";
 export default class ObjectiveController
 {
     private state: ObjectiveState;
-    public constructor()
+    public constructor(objectiveState: ObjectiveState)
     {
-        this.state = new ObjectiveState();
+        this.state = objectiveState;
     }
     public formObjectiveState(playerAggregationState: PlayerState[]): ObjectiveState
     {
