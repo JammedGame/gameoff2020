@@ -10,10 +10,13 @@ public class CameraScript : MonoBehaviour
 
     private Vector3 velocity = Vector3.zero;
 
-    void Update()
+    void LateUpdate()
     {
+        transform.rotation = target.rotation;
+
         // Define a target position above and behind the target transform
-        Vector3 targetPosition = target.transform.position + followDistance;
+        var relativeFollow = followDistance.x * target.right + followDistance.y * target.up + followDistance.z * target.forward;
+        Vector3 targetPosition = target.transform.position + relativeFollow;
 
         // Smoothly move the camera towards that target position
         transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
