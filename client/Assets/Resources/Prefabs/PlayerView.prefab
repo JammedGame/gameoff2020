@@ -107,6 +107,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66646791af4e24a91b95a45211a99a1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 6000
-  acceleration: 120
+  maxSpeed: 100
+  acceleration: 40
   speedFallOff: 0
