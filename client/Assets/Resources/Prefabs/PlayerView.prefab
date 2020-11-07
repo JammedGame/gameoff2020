@@ -109,4 +109,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 6000
   acceleration: 120
-  speedFallOff: 0.8
+  speedFallOff: 0
