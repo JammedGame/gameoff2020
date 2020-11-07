@@ -529,7 +529,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1254533655}
-  smoothTime: 0.01
+  smoothTime: 0.5
   followDistance: {x: 0, y: 1, z: -5}
 --- !u!1 &1254533650
 GameObject:
@@ -566,7 +566,7 @@ MonoBehaviour:
   maxSpeed: 100
   acceleration: 2
   speedFallOff: 0.8
-  smoothTime: 0.3
+  smoothTime: 0
 --- !u!136 &1254533652
 CapsuleCollider:
   m_ObjectHideFlags: 0
