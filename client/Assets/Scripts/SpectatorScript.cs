@@ -6,7 +6,7 @@ public class SpectatorScript : MonoBehaviour
     public float acceleration;
     public float speedFallOff = 0.5f;
 
-    private Vector3 currentSpeed = Vector3.zero;
+    private Vector3 currentVelocity = Vector3.zero;
 
     private void Update()
     {
@@ -14,18 +14,17 @@ public class SpectatorScript : MonoBehaviour
         transform.Rotate(-Input.GetAxisRaw("Mouse Y"), Input.GetAxisRaw("Mouse X"), 0);
 
         // speed fall off
-        var speedFallOffThisTick = speedFallOff * Time.deltaTime;
-        currentSpeed *= 1 - speedFallOffThisTick;
+        currentVelocity = Vector3.Lerp(currentVelocity, Vector3.zero, speedFallOff * Time.deltaTime);
 
         // accelerate
         var v = Input.GetAxisRaw("Vertical");
         var h = Input.GetAxisRaw("Horizontal");
-        currentSpeed += (h * transform.right + v * transform.forward) * acceleration * Time.deltaTime;
+        currentVelocity += (h * transform.right + v * transform.forward) * acceleration * Time.deltaTime;
 
         // clamp speed
-        Vector3.ClampMagnitude(currentSpeed, maxSpeed);
+        Vector3.ClampMagnitude(currentVelocity, maxSpeed);
 
         // move
-        transform.position += currentSpeed;
+        transform.position += currentVelocity;
     }
 }
