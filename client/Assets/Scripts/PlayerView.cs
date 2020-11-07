@@ -25,7 +25,8 @@ public class PlayerView : MonoBehaviour
         // accelerate
         var v = Input.GetAxisRaw("Vertical");
         var h = Input.GetAxisRaw("Horizontal");
-        newVelocity += (h * transform.right + v * transform.forward) * acceleration * Time.deltaTime;
+        var gravityAcceleration = GravityController.Instance.getGravityAcceleration(State.Position);
+        newVelocity += (h * transform.right + v * transform.forward + gravityAcceleration) * acceleration * Time.deltaTime;
 
         // clamp speed
         newVelocity = Vector3.ClampMagnitude(newVelocity, maxSpeed);

@@ -1,15 +1,15 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class GravityController {
+public class GravityController : ScriptableObject {
 
-    public List<Planet> planetArray;
+    public List<Planet> planetList = new List<Planet>();
     public float gravityCoeficient;
     private static GravityController instance;
     public static GravityController Instance {
         get {
             if (instance == null) {
-                instance = new GravityController();
+                instance = Resources.Load<GravityController>("GravityController");
             }
             return instance;
         }
@@ -20,12 +20,12 @@ public class GravityController {
     }
 
     public void AddPlanet(Planet newPlanet) {
-        planetArray.Add(newPlanet);
+        planetList.Add(newPlanet);
     }
 
     public Vector3 getGravityAcceleration(Vector3 position) {
         var gravityAcceleration = Vector3.zero;
-        foreach (var planet in planetArray)
+        foreach (var planet in planetList)
         {
             gravityAcceleration += ((gravityCoeficient * planet.mass) / Mathf.Pow(Vector3.Distance(position, planet.position), 2)) * (planet.position - position);
 
