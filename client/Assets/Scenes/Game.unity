@@ -545,7 +545,7 @@ GameObject:
   - component: {fileID: 1254533652}
   - component: {fileID: 1254533651}
   m_Layer: 0
-  m_Name: Spectator
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -566,7 +566,6 @@ MonoBehaviour:
   maxSpeed: 100
   acceleration: 2
   speedFallOff: 0.8
-  smoothTime: 0
 --- !u!136 &1254533652
 CapsuleCollider:
   m_ObjectHideFlags: 0

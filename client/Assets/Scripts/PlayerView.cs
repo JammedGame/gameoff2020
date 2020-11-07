@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class SpectatorScript : MonoBehaviour
+public class PlayerView : MonoBehaviour
 {
     public float maxSpeed;
     public float acceleration;
