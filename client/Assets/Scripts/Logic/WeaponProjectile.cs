@@ -1,22 +1,26 @@
+using Communication;
 using UnityEngine;
 
 namespace Logic
 {
     public class WeaponProjectile
     {
-        private Vector3 position;
-        private Quaternion rotation;
-        private Vector3 velocity;
+        private ProjectileState state;
 
-        public Vector3 Position => position;
-        public Quaternion Rotation => rotation;
+        public Vector3 Position => state.position;
+        public Quaternion Rotation => state.rotation;
 
         public WeaponProjectile(Vector3 position, Quaternion rotation, Vector3 velocity) =>
-            (this.position, this.rotation, this.velocity) = (position, rotation, velocity);
+            state = new ProjectileState
+            {
+                position = position,
+                rotation = rotation,
+                velocity = velocity,
+            };
 
         public void Tick(float dT)
         {
-            position += velocity * dT;
+            state.position += state.velocity * dT;
         }
     }
 }

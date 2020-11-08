@@ -55,6 +55,7 @@ namespace Communication
 		public int tickId;
 		public float tickTime;
 		public List<PlayerState> players;
+		public List<ProjectileState> projectiles;
 	}
 
 	/// <summary>
@@ -64,6 +65,19 @@ namespace Communication
 	public struct PlayerState
 	{
 		public int id;
+		public Vector3 position;
+		public Quaternion rotation;
+		public Vector3 velocity;
+	}
+
+	/// <summary>
+	/// State of a projectile for one tick.
+	/// </summary>
+	[Serializable]
+	public struct ProjectileState
+	{
+		public int id;
+		public int parentId;
 		public Vector3 position;
 		public Quaternion rotation;
 		public Vector3 velocity;
