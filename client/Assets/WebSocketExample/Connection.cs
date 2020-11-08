@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Communication;
 using UnityEngine;
+using UnityEngine.Serialization;
 using NativeWebSocket;
 
 public class Connection : MonoBehaviour
@@ -35,7 +37,8 @@ public class Connection : MonoBehaviour
 		{
 			// Reading a plain text message
 			var message = System.Text.Encoding.UTF8.GetString(bytes);
-			Debug.Log("Received Global State " + message);
+			var globalState = JsonUtility.FromJson<GlobalState>(message);
+			Debug.Log("Received Global State " + JsonUtility.ToJson(globalState));
 		};
 
 		// Keep sending messages at every 0.3s
@@ -51,15 +54,24 @@ public class Connection : MonoBehaviour
 		#endif
 	}
 
-	async void SendWebSocketMessage()
+	private async void SendWebSocketMessage()
 	{
 		if (websocket.State == WebSocketState.Open)
 		{
 			// Sending bytes
 			//await websocket.Send(new byte[] { 10, 20, 30 });
 
+			var playerState = new PlayerState()
+			{
+				id = 1,
+				position = new Vector3(10, 20, 30),
+				velocity = new Vector3()
+			};
+
+			var playerStateText = JsonUtility.ToJson(playerState);
+
 			// Sending plain text
-			await websocket.SendText("{ \"Id\":\"nikola\", \"Position\":{ \"x\":0, \"y\":1, \"z\":0 }, \"Velocity\":{ \"x\":1, \"y\":0, \"z\":0 } }");
+			await websocket.SendText(playerStateText);
 		}
 	}
 

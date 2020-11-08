@@ -7,23 +7,23 @@ namespace Communication
 	[Serializable]
 	public enum ResponseStatus
 	{
-		Undefined = 0,
-		Success = 1,
-		Fail = 2
+		undefined = 0,
+		success = 1,
+		fail = 2
 	}
 
 	[Serializable]
 	public class GameJoinRequest
 	{
-		public string PlayerName;
+		public string playerName;
 	}
 
 	[Serializable]
 	public class GameJoinResponse
 	{
-		public ResponseStatus Status;
-		public GameSetupData GameData;
-		public int MyPlayerId; // contains id assigned by the server.
+		public ResponseStatus status;
+		public GameSetupData gameData;
+		public int myPlayerId; // contains id assigned by the server.
 	}
 
 	/// <summary>
@@ -32,8 +32,8 @@ namespace Communication
 	[Serializable]
 	public class GameSetupData
 	{
-		public string MapName;
-		public List<PlayerSetupData> AllPlayers;
+		public string mapName;
+		public List<PlayerSetupData> allPlayers;
 	}
 
 	/// <summary>
@@ -42,42 +42,29 @@ namespace Communication
 	[Serializable]
 	public class PlayerSetupData
 	{
-		public int Id;
-
-		public string PlayerName;
+		public int id;
+		public string playerName;
 	}
 
 	/// <summary>
 	/// State of the whole game for one tick.
 	/// </summary>
 	[Serializable]
-	public class GameTickState
+	public class GlobalState
 	{
-		public int TickId;
-		public float TickTime;
-		public List<PlayerState> Players;
+		public int tickId;
+		public float tickTime;
+		public List<PlayerState> players;
 	}
 
 	/// <summary>
 	/// State of the player ship for one tick.
 	/// </summary>
 	[Serializable]
-	public class PlayerState
+	public struct PlayerState
 	{
-		public int playerId;
-		public float x, y, z;
-		public float vx, vy, vz; //
-
-		public Vector3 Position
-		{
-			get => new Vector3(x, y, z);
-			set => (x, y, z) = (value.x, value.y, value.z);
-		}
-
-		public Vector3 Velocity
-		{
-			get => new Vector3(vx, vy, vz);
-			set => (vx, vy, vz) = (value.x, value.y, value.z);
-		}
+		public int id;
+		public Vector3 position;
+		public Vector3 velocity;
 	}
 }
