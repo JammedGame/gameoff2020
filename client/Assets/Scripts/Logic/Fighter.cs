@@ -42,8 +42,7 @@ namespace Logic
             state.velocity = newVelocity;
 
             // move
-            var newPosition = state.position + newVelocity * dT;
-            state.position = newPosition;
+            state.position += newVelocity * dT;
 
             // shoot
             timeSinceLastShot += dT;
@@ -54,7 +53,11 @@ namespace Logic
         {
             timeSinceLastShot = 0;
 
-            var projectile = new WeaponProjectile(state.position, state.rotation, state.velocity.magnitude + settings.projectileSpeed);
+            var projectile = new WeaponProjectile(
+                state.position,
+                state.rotation,
+                state.velocity + state.rotation * Vector3.forward * settings.projectileSpeed
+            );
             GameController.Instance.AddProjectile(projectile);
         }
     }

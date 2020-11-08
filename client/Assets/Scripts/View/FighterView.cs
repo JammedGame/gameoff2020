@@ -9,6 +9,11 @@ namespace View
 
         public Fighter Fighter { get; set; }
 
+        private void Start()
+        {
+            transform.localPosition = Fighter.Position;
+        }
+
         private void Update()
         {
             transform.localPosition = Vector3.Lerp(transform.localPosition, Fighter.Position, 1 - smoothMovement);
