@@ -63,9 +63,9 @@ public class Connection : MonoBehaviour
 
 			var playerState = new PlayerState()
 			{
-				Id = 1,
-				Position = new Vector3(10, 20, 30),
-				Velocity = new Vector3()
+				id = 1,
+				position = new Vector3(10, 20, 30),
+				velocity = new Vector3()
 			};
 
 			var playerStateText = JsonUtility.ToJson(playerState);
