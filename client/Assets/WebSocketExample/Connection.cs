@@ -37,7 +37,7 @@ public class Connection : MonoBehaviour
 		{
 			// Reading a plain text message
 			var message = System.Text.Encoding.UTF8.GetString(bytes);
-			var globalState = JsonUtility.FromJson<GameTickState>(message);
+			var globalState = JsonUtility.FromJson<GlobalState>(message);
 			Debug.Log("Received Global State " + JsonUtility.ToJson(globalState));
 		};
 

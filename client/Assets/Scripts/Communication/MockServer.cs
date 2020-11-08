@@ -11,14 +11,14 @@ public class MockServer : IServer
 
     #region API
 
-	public event Action<GameTickState> OnAuthoritativeStateRecieved;
+	public event Action<GlobalState> OnAuthoritativeStateRecieved;
 
 	public void JoinGame(GameJoinRequest request, Action<GameJoinResponse> response)
 	{
 		throw new NotImplementedException();
 	}
 
-	public void SendClientState(int playerId, GameTickState newTickState)
+	public void SendClientState(int playerId, GlobalState newTickState)
 	{
 	}
 

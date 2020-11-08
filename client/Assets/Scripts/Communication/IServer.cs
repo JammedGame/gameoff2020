@@ -15,11 +15,11 @@ namespace Communication
 		/// <summary>
 		/// Called by clients to send prelimiray state.
 		/// </summary>
-		void SendClientState(int playerId, GameTickState newTickState);
+		void SendClientState(int playerId, GlobalState newTickState);
 
 		/// <summary>
 		/// Event sent from server when authoritative state is ready.
 		/// </summary>
-		event Action<GameTickState> OnAuthoritativeStateRecieved;
+		event Action<GlobalState> OnAuthoritativeStateRecieved;
  	}
 }

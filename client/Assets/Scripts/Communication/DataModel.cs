@@ -51,7 +51,7 @@ namespace Communication
 	/// State of the whole game for one tick.
 	/// </summary>
 	[Serializable]
-	public class GameTickState
+	public class GlobalState
 	{
 		public int TickId;
 		public float TickTime;
