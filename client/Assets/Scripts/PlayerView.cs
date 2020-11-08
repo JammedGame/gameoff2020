@@ -7,7 +7,7 @@ public class PlayerView : MonoBehaviour
     public float acceleration;
     public float speedFallOff = 0.5f;
 
-    public PlayerState State { get; set; }
+    public PlayerState State;
 
     private void Start()
     {

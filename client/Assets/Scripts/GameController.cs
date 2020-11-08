@@ -16,9 +16,9 @@ public class GameController : MonoBehaviour
         var playerView = Instantiate(Resources.Load<PlayerView>("Prefabs/PlayerView"));
         playerView.State = new PlayerState
         {
-            playerId = 1,
-            x = 0, y = 0, z = -1200f,
-            vx = 0, vy = 0, vz = 0,
+            Id = 1,
+            Position = new Vector3(0, 0, -1200f),
+            Velocity = new Vector3(),
         };
         cameraController.target = playerView.transform;
     }
