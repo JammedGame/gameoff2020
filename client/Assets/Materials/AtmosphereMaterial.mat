@@ -77,7 +77,7 @@ Material:
     - Vector1_F316C31C: 1
     - _AlphaClip: 0
     - _ApproachDistance: 100
-    - _BackAlpha: 0.9
+    - _BackAlpha: 0.5
     - _Blend: 1
     - _BumpScale: 1
     - _CameraMultiply: 0.5
