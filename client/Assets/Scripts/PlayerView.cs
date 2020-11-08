@@ -6,8 +6,10 @@ public class PlayerView : MonoBehaviour
     public float maxSpeed;
     public float acceleration;
     public float speedFallOff = 0.5f;
-
+    public float attackSpeed = 1f;
+    public float projectileSpeed = 100f;
     public PlayerState State;
+    private float timeStampOfLastShot = -1f;
 
     private void Start()
     {
@@ -37,5 +39,20 @@ public class PlayerView : MonoBehaviour
         var newPosition = State.position + newVelocity * Time.smoothDeltaTime;
         State.position = newPosition;
         transform.position = newPosition;
+
+        // shoot
+        if(Input.GetKey("space")) {
+            if(timeStampOfLastShot <= Time.time - attackSpeed) {
+                Shoot();
+            }
+        }
+    }
+
+    private void Shoot() 
+    {
+        timeStampOfLastShot = Time.time;
+
+        var projectile = Instantiate(Resources.Load<WeaponProjectileView>("Prefabs/WeaponProjectileView"));
+        projectile.SetPositionAndVelocity(transform, State.velocity + (projectileSpeed * transform.forward));
     }
 }
