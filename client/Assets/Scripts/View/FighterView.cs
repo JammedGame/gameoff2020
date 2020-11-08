@@ -5,11 +5,13 @@ namespace View
 {
     public class FighterView : MonoBehaviour
     {
+        public float smoothMovement = 0.8f;
+
         public Fighter Fighter { get; set; }
 
         private void Update()
         {
-            transform.localPosition = Fighter.Position;
+            transform.localPosition = Vector3.Lerp(transform.localPosition, Fighter.Position, 1 - smoothMovement);
             transform.localRotation = Fighter.Rotation;
         }
     }

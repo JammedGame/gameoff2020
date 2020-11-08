@@ -3,7 +3,7 @@
 public class CameraController : MonoBehaviour
 {
     public Transform target;
-    public float smoothTime = 0.3F;
+    public float smoothMovement = 0.8f;
     public Vector3 followDistance = new Vector3(0, 1f, -1f);
 
     void LateUpdate()
@@ -18,6 +18,6 @@ public class CameraController : MonoBehaviour
         var targetPosition = target.transform.position + relativeFollow;
 
         // Smoothly move the camera towards that target position
-        transform.position = Vector3.Lerp(transform.position, targetPosition, smoothTime);
+        transform.position = Vector3.Lerp(transform.position, targetPosition, 1 - smoothMovement);
     }
 }
