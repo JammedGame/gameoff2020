@@ -13,7 +13,7 @@ public class Connection : MonoBehaviour
 		// websocket = new WebSocket("ws://echo.websocket.org");
 		websocket = new WebSocket("ws://localhost:8080", headers: new Dictionary<string, string>()
 		{
-			["playerName"] = "Hello!"
+			["id"] = "nikola"
 		});
 
 		websocket.OnOpen += () =>
@@ -35,7 +35,7 @@ public class Connection : MonoBehaviour
 		{
 			// Reading a plain text message
 			var message = System.Text.Encoding.UTF8.GetString(bytes);
-			Debug.Log("Received OnMessage! (" + bytes.Length + " bytes) " + message);
+			Debug.Log("Received Global State " + message);
 		};
 
 		// Keep sending messages at every 0.3s
@@ -56,10 +56,10 @@ public class Connection : MonoBehaviour
 		if (websocket.State == WebSocketState.Open)
 		{
 			// Sending bytes
-			await websocket.Send(new byte[] { 10, 20, 30 });
+			//await websocket.Send(new byte[] { 10, 20, 30 });
 
 			// Sending plain text
-			await websocket.SendText("plain text message");
+			await websocket.SendText("{ \"Id\":\"nikola\", \"Position\":{ \"x\":0, \"y\":1, \"z\":0 }, \"Velocity\":{ \"x\":1, \"y\":0, \"z\":0 } }");
 		}
 	}
 

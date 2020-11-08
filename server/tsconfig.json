@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+      "resolveJsonModule": true,
+      "target": "ES5",
+      "removeComments": true,
+      "preserveConstEnums": true,
+      "sourceRoot": "./app/",
+      "rootDir": "./app/",
+      "sourceMap": true,
+      "module": "commonjs",
+      "esModuleInterop": true,
+      "outDir": "./build",
+      "experimentalDecorators": true
+    }
+}
