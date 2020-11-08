@@ -1,4 +1,4 @@
-import { autoserialize } from "cerialize";
+import { autoserialize } from 'cerialize';
 
 export default class ObjectiveState
 {

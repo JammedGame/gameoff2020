@@ -15,7 +15,6 @@ export default class SocketServer
     {
         console.info('Socket events ready');
         this.wss.on('connection', (ws, msg) => this.newConnection(ws, msg.headers['id']));
-        
     }
     private newConnection(ws, playerId): void
     {

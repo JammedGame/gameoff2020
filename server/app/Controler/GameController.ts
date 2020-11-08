@@ -1,9 +1,9 @@
-import PlayerState from "../Model/State/PlayerState";
-import GlobalState from "../Model/State/GlobalState";
-import ObjectiveState from "../Model/State/ObjectiveState";
-import ObjectiveController from "./ObjectiveController";
-import PlayerController from "./PlayerController";
-import SocketConnection from "../Server/SocketConnection";
+import PlayerState from '../Model/State/PlayerState';
+import GlobalState from '../Model/State/GlobalState';
+import ObjectiveState from '../Model/State/ObjectiveState';
+import ObjectiveController from './ObjectiveController';
+import PlayerController from './PlayerController';
+import SocketConnection from '../Server/SocketConnection';
 
 const TICK_TIME = 100;
 

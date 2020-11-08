@@ -1,5 +1,5 @@
-import PlayerState from "../Model/State/PlayerState";
-import ObjectiveState from "../Model/State/ObjectiveState";
+import PlayerState from '../Model/State/PlayerState';
+import ObjectiveState from '../Model/State/ObjectiveState';
 
 export default class ObjectiveController
 {

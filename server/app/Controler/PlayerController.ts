@@ -1,8 +1,8 @@
-import PlayerInfo from "../Model/Info/PlayerInfo";
-import PlayerState from "../Model/State/PlayerState";
-import GlobalState from "../Model/State/GlobalState";
-import SocketConnection from "../Server/SocketConnection";
-import { Deserialize, Serialize } from "cerialize";
+import PlayerInfo from '../Model/Info/PlayerInfo';
+import PlayerState from '../Model/State/PlayerState';
+import GlobalState from '../Model/State/GlobalState';
+import SocketConnection from '../Server/SocketConnection';
+import { Deserialize, Serialize } from 'cerialize';
 
 export default class PlayerController
 {

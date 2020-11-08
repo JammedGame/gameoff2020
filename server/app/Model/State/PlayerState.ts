@@ -1,5 +1,5 @@
-import Vector from "../Generic/Vector";
-import { autoserialize, autoserializeAs } from "cerialize";
+import Vector from '../Generic/Vector';
+import { autoserialize, autoserializeAs } from 'cerialize';
 
 export default class PlayerState
 {

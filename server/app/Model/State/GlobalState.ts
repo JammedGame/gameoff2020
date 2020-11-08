@@ -1,6 +1,6 @@
-import PlayerState from "./PlayerState"
-import ObjectiveState from "./ObjectiveState";
-import { autoserializeAs } from "cerialize";
+import { autoserializeAs } from 'cerialize';
+import PlayerState from './PlayerState'
+import ObjectiveState from './ObjectiveState';
 
 export default class GlobalState
 {

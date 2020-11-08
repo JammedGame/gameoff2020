@@ -1,11 +1,11 @@
-import SocketServer from "../Server/SocketServer";
-import GameController from "./GameController";
-import PlayerInfo from "../Model/Info/PlayerInfo";
-import PlayerController from "./PlayerController";
-import playersData from "../Data/TempPlayers.json";
-import SocketConnection from "../Server/SocketConnection";
-import ObjectiveController from "./ObjectiveController";
-import ObjectiveState from "../Model/State/ObjectiveState";
+import SocketServer from '../Server/SocketServer';
+import GameController from './GameController';
+import PlayerInfo from '../Model/Info/PlayerInfo';
+import PlayerController from './PlayerController';
+import playersData from '../Data/TempPlayers.json';
+import SocketConnection from '../Server/SocketConnection';
+import ObjectiveController from './ObjectiveController';
+import ObjectiveState from '../Model/State/ObjectiveState';
 
 export default class HostController
 {
