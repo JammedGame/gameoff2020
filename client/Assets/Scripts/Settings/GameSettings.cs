@@ -13,6 +13,7 @@ namespace Settings
             }
         }
 
+        public float GravityCoefficient;
         public List<FighterSettings> FighterSettings;
     }
 

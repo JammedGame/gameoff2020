@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3562641d883daaa43b48bdabb132a348, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: 
+  GravityCoefficient: 0.0000001
   FighterSettings:
   - type: 1
     maxSpeed: 100
