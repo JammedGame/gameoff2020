@@ -34,7 +34,7 @@ public class GameController : MonoBehaviour
         {
             id = 1,
             position = new Vector3(0, 0, -800f),
-            rotation = Quaternion.Euler(-30f, 0, 0),
+            rotation = Quaternion.Euler(0, 30f, 0),
             velocity = new Vector3(),
         });
         fighters.Add(player);

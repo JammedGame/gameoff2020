@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3562641d883daaa43b48bdabb132a348, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: 
-  GravityCoefficient: 0.0000005
+  GravityCoefficient: 0.0000001
   LevelSettings:
   - id: 1
     planetSettings:
@@ -23,10 +23,10 @@ MonoBehaviour:
       rotationalVelocity: {x: 0, y: 0, z: 0}
       surfacePrefab: {fileID: 8980457464325596058, guid: e3a6709240836d740926d34d69ac7410,
         type: 3}
-      terrainColor: {r: 0.745283, g: 0.30021963, b: 0.16522783, a: 0}
-      oceanColor: {r: 0.5337399, g: 0.17928976, b: 0.745283, a: 0}
+      terrainColor: {r: 0.83137256, g: 0.26596582, b: 0.1607843, a: 0}
+      oceanColor: {r: 0.5087399, g: 0.172549, b: 0.8117647, a: 0}
       atmosphereScale: 1.2
-      atmosphereColor: {r: 0.14960839, g: 0.6230993, b: 0.7735849, a: 0}
+      atmosphereColor: {r: 0, g: 0.6666667, b: 1, a: 0}
       outerAtmosphereDensity: 0.5
       innerAtmosphereDensity: 1
   FighterSettings:
