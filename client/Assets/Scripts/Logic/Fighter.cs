@@ -56,7 +56,7 @@ namespace Logic
             var projectile = new WeaponProjectile(
                 state.position,
                 state.rotation,
-                state.velocity + state.rotation * Vector3.forward * settings.projectileSpeed
+                /*state.velocity + */state.rotation * Vector3.forward * settings.projectileSpeed
             );
             GameController.Instance.AddProjectile(projectile);
         }

@@ -11,20 +11,30 @@ public class GameController : MonoBehaviour
 
     public CameraController cameraController;
 
-    private Fighter player;
+    public List<Planet> Planets { get; } = new List<Planet>();
     private readonly List<Fighter> fighters = new List<Fighter>();
     private readonly List<WeaponProjectile> projectiles = new List<WeaponProjectile>();
+    private Fighter player;
 
     private void Start()
     {
         if (Instance != null) Destroy(gameObject);
         else Instance = this;
 
+        foreach (var planetSettings in LevelId.LevelOne.GetSettings().planetSettings)
+        {
+            var planet = new Planet(planetSettings);
+            Planets.Add(planet);
+            
+            var planetView = GameObject.Instantiate(Resources.Load<PlanetView>("Prefabs/PlanetView"));
+            planetView.Planet = planet;
+        }
+
         player = new Fighter(FighterType.BasicFighter.GetSettings(), new PlayerState
         {
             id = 1,
-            position = new Vector3(0, 0, -1200f),
-            rotation = Quaternion.identity,
+            position = new Vector3(0, 0, -800f),
+            rotation = Quaternion.Euler(-30f, 0, 0),
             velocity = new Vector3(),
         });
         fighters.Add(player);
@@ -37,6 +47,11 @@ public class GameController : MonoBehaviour
     private void Update()
     {
         var dT = Time.deltaTime;
+
+        foreach (var planet in Planets)
+        {
+            planet.Tick(dT);
+        }
 
         player.SetPlayerInput(
             Quaternion.Euler(-Input.GetAxisRaw("Mouse Y"), Input.GetAxisRaw("Mouse X"), 0),

@@ -10,13 +10,13 @@
             "typeInfo": {
                 "fullName": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty"
             },
-            "JSONnodeData": "{\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"05251f2f-a1fb-4a5f-b127-69e605f5e2a6\"\n    },\n    \"m_Name\": \"_FrontAlpha\",\n    \"m_DefaultReferenceName\": \"\",\n    \"m_OverrideReferenceName\": \"_FrontAlpha\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Precision\": 0,\n    \"m_GPUInstanced\": false,\n    \"m_Hidden\": false,\n    \"m_Value\": 0.5,\n    \"m_FloatType\": 0,\n    \"m_RangeValues\": {\n        \"x\": 0.0,\n        \"y\": 1.0\n    }\n}"
+            "JSONnodeData": "{\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"05251f2f-a1fb-4a5f-b127-69e605f5e2a6\"\n    },\n    \"m_Name\": \"_FrontAlpha\",\n    \"m_DefaultReferenceName\": \"\",\n    \"m_OverrideReferenceName\": \"_FrontAlpha\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Precision\": 0,\n    \"m_GPUInstanced\": false,\n    \"m_Hidden\": false,\n    \"m_Value\": 0.5,\n    \"m_FloatType\": 1,\n    \"m_RangeValues\": {\n        \"x\": 0.0,\n        \"y\": 1.0\n    }\n}"
         },
         {
             "typeInfo": {
                 "fullName": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty"
             },
-            "JSONnodeData": "{\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"af0424b9-c070-48fc-a394-786fb4c35071\"\n    },\n    \"m_Name\": \"_BackAlpha\",\n    \"m_DefaultReferenceName\": \"Vector1_5EF04EB1\",\n    \"m_OverrideReferenceName\": \"_BackAlpha\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Precision\": 0,\n    \"m_GPUInstanced\": false,\n    \"m_Hidden\": false,\n    \"m_Value\": 0.5,\n    \"m_FloatType\": 0,\n    \"m_RangeValues\": {\n        \"x\": 0.0,\n        \"y\": 1.0\n    }\n}"
+            "JSONnodeData": "{\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"af0424b9-c070-48fc-a394-786fb4c35071\"\n    },\n    \"m_Name\": \"_BackAlpha\",\n    \"m_DefaultReferenceName\": \"Vector1_5EF04EB1\",\n    \"m_OverrideReferenceName\": \"_BackAlpha\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Precision\": 0,\n    \"m_GPUInstanced\": false,\n    \"m_Hidden\": false,\n    \"m_Value\": 0.5,\n    \"m_FloatType\": 1,\n    \"m_RangeValues\": {\n        \"x\": 0.0,\n        \"y\": 1.0\n    }\n}"
         },
         {
             "typeInfo": {
@@ -28,43 +28,43 @@
             "typeInfo": {
                 "fullName": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty"
             },
-            "JSONnodeData": "{\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"fa83b4af-a62a-4390-a110-204831f4717d\"\n    },\n    \"m_Name\": \"_CameraPower\",\n    \"m_DefaultReferenceName\": \"Vector1_B27D34DC\",\n    \"m_OverrideReferenceName\": \"_CameraPower\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Precision\": 0,\n    \"m_GPUInstanced\": false,\n    \"m_Hidden\": false,\n    \"m_Value\": 1.0,\n    \"m_FloatType\": 0,\n    \"m_RangeValues\": {\n        \"x\": 0.0,\n        \"y\": 1.0\n    }\n}"
+            "JSONnodeData": "{\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"fa83b4af-a62a-4390-a110-204831f4717d\"\n    },\n    \"m_Name\": \"_CameraPower\",\n    \"m_DefaultReferenceName\": \"Vector1_B27D34DC\",\n    \"m_OverrideReferenceName\": \"_CameraPower\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Precision\": 0,\n    \"m_GPUInstanced\": false,\n    \"m_Hidden\": false,\n    \"m_Value\": 1.0,\n    \"m_FloatType\": 1,\n    \"m_RangeValues\": {\n        \"x\": 0.0,\n        \"y\": 1.0\n    }\n}"
         },
         {
             "typeInfo": {
                 "fullName": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty"
             },
-            "JSONnodeData": "{\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"e701b477-2bf4-47dd-b2bb-3c5f75272835\"\n    },\n    \"m_Name\": \"_CameraMultiply\",\n    \"m_DefaultReferenceName\": \"Vector1_F316C31C\",\n    \"m_OverrideReferenceName\": \"_CameraMultiply\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Precision\": 0,\n    \"m_GPUInstanced\": false,\n    \"m_Hidden\": false,\n    \"m_Value\": 1.0,\n    \"m_FloatType\": 0,\n    \"m_RangeValues\": {\n        \"x\": 0.0,\n        \"y\": 1.0\n    }\n}"
+            "JSONnodeData": "{\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"e701b477-2bf4-47dd-b2bb-3c5f75272835\"\n    },\n    \"m_Name\": \"_CameraMultiply\",\n    \"m_DefaultReferenceName\": \"Vector1_F316C31C\",\n    \"m_OverrideReferenceName\": \"_CameraMultiply\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Precision\": 0,\n    \"m_GPUInstanced\": false,\n    \"m_Hidden\": false,\n    \"m_Value\": 1.0,\n    \"m_FloatType\": 1,\n    \"m_RangeValues\": {\n        \"x\": 0.0,\n        \"y\": 1.0\n    }\n}"
         },
         {
             "typeInfo": {
                 "fullName": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty"
             },
-            "JSONnodeData": "{\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"b8c7d34a-dc82-4f80-9fbc-82a3602b8f08\"\n    },\n    \"m_Name\": \"_CameraSubtract\",\n    \"m_DefaultReferenceName\": \"Vector1_D13F2F88\",\n    \"m_OverrideReferenceName\": \"_CameraSubtract\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Precision\": 0,\n    \"m_GPUInstanced\": false,\n    \"m_Hidden\": false,\n    \"m_Value\": 0.0,\n    \"m_FloatType\": 0,\n    \"m_RangeValues\": {\n        \"x\": 0.0,\n        \"y\": 1.0\n    }\n}"
+            "JSONnodeData": "{\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"b8c7d34a-dc82-4f80-9fbc-82a3602b8f08\"\n    },\n    \"m_Name\": \"_CameraSubtract\",\n    \"m_DefaultReferenceName\": \"Vector1_D13F2F88\",\n    \"m_OverrideReferenceName\": \"_CameraSubtract\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Precision\": 0,\n    \"m_GPUInstanced\": false,\n    \"m_Hidden\": false,\n    \"m_Value\": 0.0,\n    \"m_FloatType\": 1,\n    \"m_RangeValues\": {\n        \"x\": 0.0,\n        \"y\": 1.0\n    }\n}"
         },
         {
             "typeInfo": {
                 "fullName": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty"
             },
-            "JSONnodeData": "{\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"066610b1-6a06-4796-acda-30d79171e8de\"\n    },\n    \"m_Name\": \"_LightPower\",\n    \"m_DefaultReferenceName\": \"Vector1_54A32075\",\n    \"m_OverrideReferenceName\": \"_LightPower\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Precision\": 0,\n    \"m_GPUInstanced\": false,\n    \"m_Hidden\": false,\n    \"m_Value\": 1.0,\n    \"m_FloatType\": 0,\n    \"m_RangeValues\": {\n        \"x\": 0.0,\n        \"y\": 1.0\n    }\n}"
+            "JSONnodeData": "{\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"066610b1-6a06-4796-acda-30d79171e8de\"\n    },\n    \"m_Name\": \"_LightPower\",\n    \"m_DefaultReferenceName\": \"Vector1_54A32075\",\n    \"m_OverrideReferenceName\": \"_LightPower\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Precision\": 0,\n    \"m_GPUInstanced\": false,\n    \"m_Hidden\": false,\n    \"m_Value\": 1.0,\n    \"m_FloatType\": 1,\n    \"m_RangeValues\": {\n        \"x\": 0.0,\n        \"y\": 1.0\n    }\n}"
         },
         {
             "typeInfo": {
                 "fullName": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty"
             },
-            "JSONnodeData": "{\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"420b6b30-81a7-4409-971f-dd0204a0e977\"\n    },\n    \"m_Name\": \"_LightMultiply\",\n    \"m_DefaultReferenceName\": \"Vector1_D2D4419F\",\n    \"m_OverrideReferenceName\": \"_LightMultiply\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Precision\": 0,\n    \"m_GPUInstanced\": false,\n    \"m_Hidden\": false,\n    \"m_Value\": 1.0,\n    \"m_FloatType\": 0,\n    \"m_RangeValues\": {\n        \"x\": 0.0,\n        \"y\": 1.0\n    }\n}"
+            "JSONnodeData": "{\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"420b6b30-81a7-4409-971f-dd0204a0e977\"\n    },\n    \"m_Name\": \"_LightMultiply\",\n    \"m_DefaultReferenceName\": \"Vector1_D2D4419F\",\n    \"m_OverrideReferenceName\": \"_LightMultiply\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Precision\": 0,\n    \"m_GPUInstanced\": false,\n    \"m_Hidden\": false,\n    \"m_Value\": 1.0,\n    \"m_FloatType\": 1,\n    \"m_RangeValues\": {\n        \"x\": 0.0,\n        \"y\": 1.0\n    }\n}"
         },
         {
             "typeInfo": {
                 "fullName": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty"
             },
-            "JSONnodeData": "{\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"9e823b60-2ea5-45b1-b0c6-8847e45478d9\"\n    },\n    \"m_Name\": \"_LightSubtract\",\n    \"m_DefaultReferenceName\": \"Vector1_86DDE89F\",\n    \"m_OverrideReferenceName\": \"_LightSubtract\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Precision\": 0,\n    \"m_GPUInstanced\": false,\n    \"m_Hidden\": false,\n    \"m_Value\": 0.0,\n    \"m_FloatType\": 0,\n    \"m_RangeValues\": {\n        \"x\": 0.0,\n        \"y\": 1.0\n    }\n}"
+            "JSONnodeData": "{\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"9e823b60-2ea5-45b1-b0c6-8847e45478d9\"\n    },\n    \"m_Name\": \"_LightSubtract\",\n    \"m_DefaultReferenceName\": \"Vector1_86DDE89F\",\n    \"m_OverrideReferenceName\": \"_LightSubtract\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Precision\": 0,\n    \"m_GPUInstanced\": false,\n    \"m_Hidden\": false,\n    \"m_Value\": 0.0,\n    \"m_FloatType\": 1,\n    \"m_RangeValues\": {\n        \"x\": 0.0,\n        \"y\": 1.0\n    }\n}"
         },
         {
             "typeInfo": {
                 "fullName": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty"
             },
-            "JSONnodeData": "{\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"723a0430-ed02-4873-91c6-7ac3e0e7a024\"\n    },\n    \"m_Name\": \"_EdgeFeather\",\n    \"m_DefaultReferenceName\": \"Vector1_BAFC33C1\",\n    \"m_OverrideReferenceName\": \"_EdgeFeather\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Precision\": 0,\n    \"m_GPUInstanced\": false,\n    \"m_Hidden\": false,\n    \"m_Value\": 1.0,\n    \"m_FloatType\": 0,\n    \"m_RangeValues\": {\n        \"x\": 0.0,\n        \"y\": 1.0\n    }\n}"
+            "JSONnodeData": "{\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"723a0430-ed02-4873-91c6-7ac3e0e7a024\"\n    },\n    \"m_Name\": \"_EdgeFeather\",\n    \"m_DefaultReferenceName\": \"Vector1_BAFC33C1\",\n    \"m_OverrideReferenceName\": \"_EdgeFeather\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Precision\": 0,\n    \"m_GPUInstanced\": false,\n    \"m_Hidden\": false,\n    \"m_Value\": 1.0,\n    \"m_FloatType\": 1,\n    \"m_RangeValues\": {\n        \"x\": 0.0,\n        \"y\": 1.0\n    }\n}"
         },
         {
             "typeInfo": {

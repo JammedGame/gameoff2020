@@ -15,7 +15,7 @@ namespace View
         {
             var t = transform;
             t.localPosition = Planet.Settings.position;
-            t.localRotation = Planet.Settings.rotation;
+            t.localRotation = Planet.Rotation;
             t.localScale = Planet.Settings.scale;
 
             var atmosphereHeight = Planet.Settings.scale.x * (Planet.Settings.atmosphereScale - 1);
@@ -45,6 +45,11 @@ namespace View
             atmosphereMat.SetColor("_Tint", Planet.Settings.atmosphereColor);
             atmosphereMat.SetFloat("_FrontAlpha", Planet.Settings.outerAtmosphereDensity);
             atmosphereMat.SetFloat("_BackAlpha", Planet.Settings.outerAtmosphereDensity);
+        }
+
+        private void Update()
+        {
+            transform.localRotation = Planet.Rotation;
         }
     }
 }

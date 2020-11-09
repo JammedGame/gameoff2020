@@ -23,9 +23,10 @@ namespace Settings
     public class PlanetSettings
     {
         public Vector3 position;
-        public Quaternion rotation;
+        public Vector3 rotation;
         public Vector3 scale;
         public float mass;
+        public Vector3 rotationalVelocity;
         public GameObject surfacePrefab;
         public Color terrainColor;
         public Color oceanColor;

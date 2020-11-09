@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 909293392693790296}
   - component: {fileID: -7444582821017255655}
   m_Layer: 0
-  m_Name: PlayerView
+  m_Name: FighterView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -93,6 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 474d4e39385e76c498e324df225409a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  smoothMovement: 0
 --- !u!135 &-7444582821017255655
 SphereCollider:
   m_ObjectHideFlags: 0
