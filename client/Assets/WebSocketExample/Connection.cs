@@ -8,6 +8,7 @@ using NativeWebSocket;
 
 public class Connection : MonoBehaviour
 {
+	bool started = false;
 	WebSocket websocket;
 
 	async void Start()
@@ -15,7 +16,8 @@ public class Connection : MonoBehaviour
 		// websocket = new WebSocket("ws://echo.websocket.org");
 		websocket = new WebSocket("ws://localhost:8080", headers: new Dictionary<string, string>()
 		{
-			["id"] = "nikola"
+			["gameid"] = "temp",
+			["playerid"] = "nikola",
 		});
 
 		websocket.OnOpen += () =>
@@ -36,13 +38,21 @@ public class Connection : MonoBehaviour
 		websocket.OnMessage += (bytes) =>
 		{
 			// Reading a plain text message
-			var message = System.Text.Encoding.UTF8.GetString(bytes);
-			var globalState = JsonUtility.FromJson<GlobalState>(message);
-			Debug.Log("Received Global State " + JsonUtility.ToJson(globalState));
+			var messageData = System.Text.Encoding.UTF8.GetString(bytes);
+			var message = JsonUtility.FromJson<SocketMessage>(messageData);
+			if (message.type == "start")
+			{
+				this.started = true;
+				Debug.Log("Game started");
+				InvokeRepeating("SendWebSocketMessage", 0.0f, 0.3f);
+			}
+			else if (message.type == "state")
+			{
+				var state = (GlobalState) message.data;
+				Debug.Log("Received Global State");
+			}
 		};
-
 		// Keep sending messages at every 0.3s
-		InvokeRepeating("SendWebSocketMessage", 0.0f, 0.3f);
 
 		await websocket.Connect();
 	}

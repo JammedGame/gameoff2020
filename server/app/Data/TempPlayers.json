@@ -1,18 +1,18 @@
 [
     {
-        "Id": "manojlo",
-        "Name": "DeinVenteD"
+        "id": "manojlo",
+        "name": "DeinVenteD"
     },
     {
-        "Id": "nikola",
-        "Name": "BigHatLogan"
+        "id": "nikola",
+        "name": "BigHatLogan"
     },
     {
-        "Id": "misa",
-        "Name": "SirIntruder"
+        "id": "misa",
+        "name": "SirIntruder"
     },
     {
-        "Id": "plavsic",
-        "Name": "Pixi3"
+        "id": "plavsic",
+        "name": "Pixi3"
     }
 ]

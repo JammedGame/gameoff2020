@@ -1,5 +1,5 @@
 import * as WebSocket from 'ws';
-import GameServer from './GameServer';
+import GameServer from '../GameServer';
 import SocketConnection from './SocketConnection';
 
 export default class SocketServer
@@ -14,12 +14,12 @@ export default class SocketServer
     private connect(): void
     {
         console.info('Socket events ready');
-        this.wss.on('connection', (ws, msg) => this.newConnection(ws, msg.headers['id']));
+        this.wss.on('connection', (ws, msg) => this.newConnection(ws, msg.headers['gameid'], msg.headers['playerid']));
     }
-    private newConnection(ws, playerId): void
+    private newConnection(ws, gameId, playerId): void
     {
         if (this.onNewConnection) {
-            this.onNewConnection(new SocketConnection(ws), playerId)
+            this.onNewConnection(new SocketConnection(ws), gameId, playerId)
         }
     }
 }

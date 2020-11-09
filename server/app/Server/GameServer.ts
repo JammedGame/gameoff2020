@@ -3,7 +3,7 @@ import {
     createServer,
     RequestListener
 } from 'http';
-import SocketServer from './SocketServer';
+import SocketServer from './Socket/SocketServer';
 
 const DEFAULT_PORT = '8080';
 
@@ -21,7 +21,7 @@ export default class GameServer
     public start(): void
     {
         this.server.listen(DEFAULT_PORT, function () {
-            console.log('Listening on http://localhost:' + DEFAULT_PORT);
+            console.info('Listening on http://localhost:' + DEFAULT_PORT);
         });
     }
 }

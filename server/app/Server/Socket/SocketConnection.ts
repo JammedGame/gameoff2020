@@ -5,6 +5,7 @@ export default class SocketConnection
 {
     public open: boolean;
     public connection: any;
+    public OnClosed: Function;
     public OnReceived: Function;
     public constructor(webSocketConnection: any)
     {
@@ -17,11 +18,17 @@ export default class SocketConnection
     {
         this.connection.send(JSON.stringify(data));
     }
+    public close(): void
+    {
+        this.connection.close();
+    }
     private connectionClosed(): void
     {
         this.open = false;
         this.connection = null;
-        console.info('Player has disconnected.');
+        if (this.OnClosed) {
+            this.OnClosed();
+        }
     }
     private receive(data: string): void
     {

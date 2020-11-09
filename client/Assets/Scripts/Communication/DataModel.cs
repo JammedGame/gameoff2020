@@ -82,4 +82,14 @@ namespace Communication
 		public Quaternion rotation;
 		public Vector3 velocity;
 	}
+
+	/// <summary>
+	/// State of the player ship for one tick.
+	/// </summary>
+	[Serializable]
+	public struct SocketMessage
+	{
+		public string type;
+		public object data;
+	}
 }
