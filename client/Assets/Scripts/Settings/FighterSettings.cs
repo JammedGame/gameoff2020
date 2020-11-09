@@ -5,7 +5,7 @@ namespace Settings
     public enum FighterType
     {
         Undefined = 0,
-        Default = 1,
+        BasicFighter = 1,
     }
 
     [Serializable]

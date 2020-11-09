@@ -20,7 +20,7 @@ public class GameController : MonoBehaviour
         if (Instance != null) Destroy(gameObject);
         else Instance = this;
 
-        player = new Fighter(FighterType.Default.GetSettings(), new PlayerState
+        player = new Fighter(FighterType.BasicFighter.GetSettings(), new PlayerState
         {
             id = 1,
             position = new Vector3(0, 0, -1200f),
