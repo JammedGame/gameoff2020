@@ -12,7 +12,6 @@ public static class DebugMenu
 
     private static GameSetupData LastGame => games.FindLast(g => true);
     private static GameSetupData LastStartableGame => games.FindLast(g => g.players > 0 && !g.started);
-    private static GameSetupData LastStartedGame => games.FindLast(g => g.started);
     private static GameSetupData LastJoinableGame => games.FindLast(g => g.players < MoonshotServer.PlayersPerGame && !g.started);
 
     [MenuItem("Moonshot/ListGames")]
@@ -22,7 +21,6 @@ public static class DebugMenu
         {
             var jsonResponse = JsonUtility.ToJson(response, true);
             Debug.Log($"{nameof(ListGames)} : {jsonResponse}");
-
             games.AddRange(response.games);
         });
     }
@@ -98,7 +96,6 @@ public static class DebugMenu
         {
             var jsonResponse = JsonUtility.ToJson(response, true);
             Debug.Log($"{nameof(CreateGame)} : {jsonResponse}");
-
             games.Add(new GameSetupData
             {
                 id = response.id,
