@@ -166,23 +166,26 @@ namespace Communication
             websocket.OnOpen += () => Debug.Log("Connection open!");
             websocket.OnError += e => Debug.Log("Error! " + e);
             websocket.OnClose += e => Debug.Log("Connection closed!");
-            websocket.OnMessage += bytes =>
-            {
-                var messageData = System.Text.Encoding.UTF8.GetString(bytes);
-                var message = JsonUtility.FromJson<SocketMessage>(messageData);
-                if (message.type == WebsocketMessageType.start.ToString())
-                {
-                    Debug.Log("Game started");
-                    Started = true;
-                }
-                else if (message.type == WebsocketMessageType.state.ToString())
-                {
-                    Debug.Log($"Received Global State : {(string) message.data}");
-                    var state = message.data as GlobalState;
-                    OnAuthoritativeStateRecieved?.Invoke(state);
-                }
-            };
+            websocket.OnMessage += WebsocketOnMessage;
             await websocket.Connect();
+        }
+
+        private void WebsocketOnMessage(byte[] bytes)
+        {
+            var messageData = System.Text.Encoding.UTF8.GetString(bytes);
+            var message = JsonUtility.FromJson<SocketMessage>(messageData);
+            if (message.type == WebsocketMessageType.start.ToString())
+            {
+                Debug.Log($"Game started : {messageData}");
+                Started = true;
+            }
+            else if (message.type == WebsocketMessageType.state.ToString())
+            {
+                Debug.Log($"Received Global State : {messageData}");
+                var stateMessage = JsonUtility.FromJson<StateSocketMessage>(messageData);
+                var state = stateMessage.data;
+                OnAuthoritativeStateRecieved?.Invoke(state);
+            }
         }
 
         public async void SendClientState(PlayerState newTickState)

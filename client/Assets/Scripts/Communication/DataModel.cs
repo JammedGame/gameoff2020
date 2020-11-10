@@ -134,7 +134,7 @@ namespace Communication
 	public class GlobalState
 	{
 		public List<PlayerState> players;
-		// public ObjectiveState objective;
+		public ObjectiveState objective;
 
 		public void CopyFrom(GlobalState newState, string excludePlayerId)
 		{
@@ -194,6 +194,12 @@ namespace Communication
 		}
 	}
 
+	[Serializable]
+	public struct ObjectiveState
+	{
+		public float affinity;
+	}
+
 	/// <summary>
 	/// State of the player ship for one tick.
 	/// </summary>
@@ -201,6 +207,12 @@ namespace Communication
 	public struct SocketMessage
 	{
 		public string type;
-		public object data;
+	}
+	
+	[Serializable]
+	public struct StateSocketMessage
+	{
+		public string type;
+		public GlobalState data;
 	}
 }
