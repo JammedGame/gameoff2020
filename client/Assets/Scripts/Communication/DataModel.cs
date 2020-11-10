@@ -123,7 +123,7 @@ namespace Communication
 	[Serializable]
 	public class PlayerInfo
 	{
-		public int id;
+		public string id;
 		public string playerName;
 	}
 
@@ -133,20 +133,17 @@ namespace Communication
 	[Serializable]
 	public class GlobalState
 	{
-		public int tickId;
-		public float tickTime;
 		public List<PlayerState> players;
+		// public ObjectiveState objective;
 
-		public void CopyFrom(GlobalState newState)
+		public void CopyFrom(GlobalState newState, string excludePlayerId)
 		{
-			tickId = newState.tickId;
-			tickTime = newState.tickTime;
 			foreach (var newPlayer in newState.players)
 			{
 				var existingPlayerIndex = players.FindIndex(p => p.id == newPlayer.id);
-				if (existingPlayerIndex >= 0) players[existingPlayerIndex].CopyFrom(newPlayer);
-				else players.Add(newPlayer);
-			}
+                if (existingPlayerIndex < 0) players.Add(newPlayer);
+                else if (newPlayer.id != excludePlayerId) players[existingPlayerIndex].CopyFrom(newPlayer);
+            }
 		}
 	}
 
@@ -156,7 +153,7 @@ namespace Communication
 	[Serializable]
 	public struct PlayerState
 	{
-		public int id;
+		public string id;
 		public Vector3 position;
 		public Quaternion rotation;
 		public Vector3 velocity;
@@ -183,7 +180,7 @@ namespace Communication
 	[Serializable]
 	public struct ProjectileState
 	{
-		public int id;
+		public string id;
 		public Vector3 position;
 		public Quaternion rotation;
 		public Vector3 velocity;

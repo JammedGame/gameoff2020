@@ -38,7 +38,7 @@ public class GameController : MonoBehaviour
 
         player = new Fighter(FighterType.BasicFighter.GetSettings(), new PlayerState
         {
-            id = 1,
+            id = "1",
             position = new Vector3(0, 0, -800f),
             rotation = Quaternion.Euler(0, 30f, 0),
             velocity = new Vector3(),
@@ -54,7 +54,7 @@ public class GameController : MonoBehaviour
 
     private void LoadAuthoritativeState(GlobalState state)
     {
-        GlobalState.CopyFrom(state);
+        GlobalState.CopyFrom(state, player.PlayerId);
     }
 
     private void Update()

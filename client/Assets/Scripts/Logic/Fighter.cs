@@ -13,6 +13,7 @@ namespace Logic
         private Vector3 inputAcceleration;
         private bool inputShoot;
 
+        public string PlayerId => state.id;
         public Vector3 Position => state.position;
         public Quaternion Rotation => state.rotation;
 
