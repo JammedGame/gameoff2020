@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 using Communication;
 using System;
 
@@ -13,14 +11,34 @@ public class MockServer : IServer
 
 	public event Action<GlobalState> OnAuthoritativeStateRecieved;
 
-	public void JoinGame(GameJoinRequest request, Action<GameJoinResponse> response)
+    public void CreateGame(CreateGameRequest request, Action<CreateGameResponse> onResponse)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void FindGame(FindGameRequest request, Action<FindGameResponse> onResponse)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void JoinGame(GameJoinRequest request, Action<GameJoinResponse> response)
 	{
 		throw new NotImplementedException();
 	}
 
-	public void SendClientState(int playerId, GlobalState newTickState)
+    public void ListGames(ListGamesRequest request, Action<ListGamesResponse> onResponse)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void SendClientState(PlayerState newTickState)
 	{
 	}
+
+    public void StartGame(StartGameRequest request, Action<StartGameResponse> onResponse)
+    {
+        throw new NotImplementedException();
+    }
 
     #endregion
 

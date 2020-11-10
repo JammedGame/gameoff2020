@@ -1,21 +1,31 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 namespace Communication
 {
 	public interface IServer
 	{
+		/// GET
+		void ListGames(ListGamesRequest request, Action<ListGamesResponse> onResponse);
+
+		/// GET
+		void FindGame(FindGameRequest request, Action<FindGameResponse> onResponse);
+
+		/// PUT
+		void StartGame(StartGameRequest request, Action<StartGameResponse> onResponse);
+	
 		/// <summary>
-		/// Called by clients when they want to join. Response will be returned by the callback later.
+		/// PUT
+		/// Called by clients when they want to join. Response will be returned via callback later.
 		/// </summary>
-		void JoinGame(GameJoinRequest request, Action<GameJoinResponse> response);
+		void JoinGame(GameJoinRequest request, Action<GameJoinResponse> onResponse);
+
+		/// POST
+		void CreateGame(CreateGameRequest request, Action<CreateGameResponse> onResponse);
 
 		/// <summary>
-		/// Called by clients to send prelimiray state.
+		/// Called by clients to send preliminary state.
 		/// </summary>
-		void SendClientState(int playerId, GlobalState newTickState);
+		void SendClientState(PlayerState newTickState);
 
 		/// <summary>
 		/// Event sent from server when authoritative state is ready.

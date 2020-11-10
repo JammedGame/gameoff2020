@@ -5,25 +5,72 @@ using UnityEngine;
 namespace Communication
 {
 	[Serializable]
-	public enum ResponseStatus
+	public class ListGamesRequest {}
+
+	[Serializable]
+	public class ListGamesResponse
 	{
-		undefined = 0,
-		success = 1,
-		fail = 2
+		public string message;
+		public List<GameSetupData> games;
+	}
+
+	[Serializable]
+	public class FindGameRequest
+	{
+		public string id;
+	}
+
+	[Serializable]
+	public class FindGameResponse
+	{
+		public string message;
+		public string id;
+		public string name;
+		public bool started;
+		public List<PlayerSetupData> players;
+	}
+
+	[Serializable]
+	public class StartGameRequest
+	{
+		public string id;
+	}
+
+	[Serializable]
+	public class StartGameResponse
+	{
+		public string message;
 	}
 
 	[Serializable]
 	public class GameJoinRequest
 	{
+		public string id;
 		public string playerName;
 	}
 
 	[Serializable]
 	public class GameJoinResponse
 	{
-		public ResponseStatus status;
-		public GameSetupData gameData;
-		public int myPlayerId; // contains id assigned by the server.
+		public string message;
+		public string id;
+		public string name;
+	}
+
+	[Serializable]
+	public class CreateGameRequest
+	{
+		public string name;
+	}
+
+	[Serializable]
+	public class CreateGameResponse
+	{
+		public string message;
+		public string id;
+		public string name;
+		public bool started;
+		public List<PlayerSetupData> players;
 	}
 
 	/// <summary>
@@ -32,8 +79,10 @@ namespace Communication
 	[Serializable]
 	public class GameSetupData
 	{
-		public string mapName;
-		public List<PlayerSetupData> allPlayers;
+		public string id;
+		public string name;
+		public bool started;
+		public int players;
 	}
 
 	/// <summary>
@@ -41,6 +90,12 @@ namespace Communication
 	/// </summary>
 	[Serializable]
 	public class PlayerSetupData
+	{
+		public PlayerInfo info;
+	}
+
+	[Serializable]
+	public class PlayerInfo
 	{
 		public int id;
 		public string playerName;
@@ -55,7 +110,6 @@ namespace Communication
 		public int tickId;
 		public float tickTime;
 		public List<PlayerState> players;
-		public List<ProjectileState> projectiles;
 	}
 
 	/// <summary>
@@ -68,6 +122,7 @@ namespace Communication
 		public Vector3 position;
 		public Quaternion rotation;
 		public Vector3 velocity;
+		public List<ProjectileState> projectiles;
 	}
 
 	/// <summary>
@@ -76,8 +131,6 @@ namespace Communication
 	[Serializable]
 	public struct ProjectileState
 	{
-		public int id;
-		public int parentId;
 		public Vector3 position;
 		public Quaternion rotation;
 		public Vector3 velocity;
