@@ -5,11 +5,33 @@ using UnityEngine;
 namespace Communication
 {
 	[Serializable]
+	public enum ResponseStatus
+	{
+		success = 0,
+		fail = 1,
+	}
+
+	[Serializable]
+	public enum WebsocketHeaderKey
+    {
+        gameid,
+        playerid,
+    }
+
+	[Serializable]
+    public enum WebsocketMessageType
+    {
+        start,
+        state,
+    }
+
+	[Serializable]
 	public class ListGamesRequest {}
 
 	[Serializable]
 	public class ListGamesResponse
 	{
+		public ResponseStatus status;
 		public string message;
 		public List<GameSetupData> games;
 	}
@@ -23,6 +45,7 @@ namespace Communication
 	[Serializable]
 	public class FindGameResponse
 	{
+		public ResponseStatus status;
 		public string message;
 		public string id;
 		public string name;
@@ -39,6 +62,7 @@ namespace Communication
 	[Serializable]
 	public class StartGameResponse
 	{
+		public ResponseStatus status;
 		public string message;
 	}
 
@@ -52,6 +76,7 @@ namespace Communication
 	[Serializable]
 	public class GameJoinResponse
 	{
+		public ResponseStatus status;
 		public string message;
 		public string id;
 		public string name;
@@ -66,6 +91,7 @@ namespace Communication
 	[Serializable]
 	public class CreateGameResponse
 	{
+		public ResponseStatus status;
 		public string message;
 		public string id;
 		public string name;
@@ -110,6 +136,18 @@ namespace Communication
 		public int tickId;
 		public float tickTime;
 		public List<PlayerState> players;
+
+		public void CopyFrom(GlobalState newState)
+		{
+			tickId = newState.tickId;
+			tickTime = newState.tickTime;
+			foreach (var newPlayer in newState.players)
+			{
+				var existingPlayerIndex = players.FindIndex(p => p.id == newPlayer.id);
+				if (existingPlayerIndex >= 0) players[existingPlayerIndex].CopyFrom(newPlayer);
+				else players.Add(newPlayer);
+			}
+		}
 	}
 
 	/// <summary>
@@ -123,6 +161,20 @@ namespace Communication
 		public Quaternion rotation;
 		public Vector3 velocity;
 		public List<ProjectileState> projectiles;
+
+		public void CopyFrom(PlayerState newState)
+		{
+			id = newState.id;
+			position = newState.position;
+			rotation = newState.rotation;
+			velocity = newState.velocity;
+			foreach (var newProjectile in newState.projectiles)
+			{
+				var existingPlayerIndex = projectiles.FindIndex(p => p.id == newProjectile.id);
+				if (existingPlayerIndex >= 0) projectiles[existingPlayerIndex].CopyFrom(newProjectile);
+				else projectiles.Add(newProjectile);
+			}
+		}
 	}
 
 	/// <summary>
@@ -131,9 +183,18 @@ namespace Communication
 	[Serializable]
 	public struct ProjectileState
 	{
+		public int id;
 		public Vector3 position;
 		public Quaternion rotation;
 		public Vector3 velocity;
+
+		public void CopyFrom(ProjectileState newState)
+		{
+			id = newState.id;
+			position = newState.position;
+			rotation = newState.rotation;
+			velocity = newState.velocity;
+		}
 	}
 
 	/// <summary>

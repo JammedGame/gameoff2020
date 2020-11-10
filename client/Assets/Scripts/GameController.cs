@@ -16,10 +16,16 @@ public class GameController : MonoBehaviour
     private readonly List<WeaponProjectile> projectiles = new List<WeaponProjectile>();
     private Fighter player;
 
+    public GlobalState GlobalState { get; private set; }
+
     private void Start()
     {
-        if (Instance != null) Destroy(gameObject);
-        else Instance = this;
+        if (Instance == null) Instance = this;
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
 
         foreach (var planetSettings in LevelId.LevelOne.GetSettings().planetSettings)
         {
@@ -42,6 +48,13 @@ public class GameController : MonoBehaviour
         var playerView = Instantiate(Resources.Load<FighterView>("Prefabs/FighterView"));
         playerView.Fighter = player;
         cameraController.target = playerView.transform;
+
+        MoonshotServer.Instance.OnAuthoritativeStateRecieved += LoadAuthoritativeState;
+    }
+
+    public void LoadAuthoritativeState(GlobalState state)
+    {
+        GlobalState.CopyFrom(state);
     }
 
     private void Update()
