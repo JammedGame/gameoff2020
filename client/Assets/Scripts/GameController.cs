@@ -52,7 +52,7 @@ public class GameController : MonoBehaviour
         MoonshotServer.Instance.OnAuthoritativeStateRecieved += LoadAuthoritativeState;
     }
 
-    public void LoadAuthoritativeState(GlobalState state)
+    private void LoadAuthoritativeState(GlobalState state)
     {
         GlobalState.CopyFrom(state);
     }
@@ -91,5 +91,10 @@ public class GameController : MonoBehaviour
         
         var projectileView = Instantiate(Resources.Load<WeaponProjectileView>("Prefabs/WeaponProjectileView"));
         projectileView.WeaponProjectile = projectile;
+    }
+
+    private void OnDestroy()
+    {
+        MoonshotServer.Instance.OnAuthoritativeStateRecieved -= LoadAuthoritativeState;
     }
 }
