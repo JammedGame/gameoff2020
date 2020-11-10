@@ -54,7 +54,14 @@ public class GameController : MonoBehaviour
 
     private void LoadAuthoritativeState(GlobalState state)
     {
-        GlobalState.CopyFrom(state, player.PlayerId);
+        if (state == null)
+        {
+            Debug.LogError($"{nameof(state)} == null");
+            return;
+        }
+
+        if (GlobalState != null) GlobalState.CopyFrom(state, player.PlayerId);
+        else GlobalState = state;
     }
 
     private void Update()

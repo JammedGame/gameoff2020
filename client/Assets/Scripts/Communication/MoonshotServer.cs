@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using NativeWebSocket;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -11,6 +12,7 @@ namespace Communication
     {
         public event Action<GlobalState> OnAuthoritativeStateRecieved;
 
+        public const int PlayersPerGame = 4;
         private const string ApiUrlBase = "http://localhost:8080/";
         private const string ApiUrlWebsocket = "ws://localhost:8080";
 
@@ -118,25 +120,40 @@ namespace Communication
             yield return request.SendWebRequest();
 
             var responseStatus = request.responseCode / 100 == 2 ? ResponseStatus.success : ResponseStatus.fail;
-            callback(responseStatus, request.downloadHandler.text);
+            var responseText = request.downloadHandler.text;
+            // Debug.Log($"{nameof(GetRequest)} : {responseText}");
+            callback(responseStatus, responseText);
         }
 
         private IEnumerator PutRequest(string url, string json, Action<ResponseStatus, string> callback)
         {
+            // Debug.Log($"PUT {url} : {json}");
+
             var request = UnityWebRequest.Put(url, json);
+            request.SetRequestHeader("Content-Type", "application/json");
             yield return request.SendWebRequest();
 
             var responseStatus = request.responseCode / 100 == 2 ? ResponseStatus.success : ResponseStatus.fail;
-            callback(responseStatus, request.downloadHandler.text);
+            var responseText = request.downloadHandler.text;
+            // Debug.Log($"{nameof(PutRequest)} : {responseText}");
+            callback(responseStatus, responseText);
         }
 
         private IEnumerator PostRequest(string url, string json, Action<ResponseStatus, string> callback)
         {
-            var request = UnityWebRequest.Post(url, json);
+            // Debug.Log($"POST {url} : {json}");
+
+            var request = new UnityWebRequest(url, "POST");
+            var bodyRaw = Encoding.UTF8.GetBytes(json);
+            request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+            request.downloadHandler = new DownloadHandlerBuffer();
+            request.SetRequestHeader("Content-Type", "application/json");
             yield return request.SendWebRequest();
 
             var responseStatus = request.responseCode / 100 == 2 ? ResponseStatus.success : ResponseStatus.fail;
-            callback(responseStatus, request.downloadHandler.text);
+            var responseText = request.downloadHandler.text;
+            // Debug.Log($"{nameof(PostRequest)} : {responseText}");
+            callback(responseStatus, responseText);
         }
 
         private async void InitializeWebsocket(string gameId, string playerId)
@@ -160,7 +177,7 @@ namespace Communication
                 }
                 else if (message.type == WebsocketMessageType.state.ToString())
                 {
-                    Debug.Log("Received Global State");
+                    Debug.Log($"Received Global State : {(string) message.data}");
                     var state = message.data as GlobalState;
                     OnAuthoritativeStateRecieved?.Invoke(state);
                 }
