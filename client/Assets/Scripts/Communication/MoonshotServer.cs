@@ -32,6 +32,8 @@ namespace Communication
 
         private void Update()
         {
+            if (websocket?.State != WebSocketState.Open) return;
+
             #if !UNITY_WEBGL || UNITY_EDITOR
                 websocket.DispatchMessageQueue();
             #endif
@@ -39,6 +41,8 @@ namespace Communication
 
         private async void OnApplicationQuit()
         {
+            if (websocket?.State != WebSocketState.Open) return;
+
             await websocket.Close();
         }
 
@@ -166,7 +170,7 @@ namespace Communication
 
         public async void SendClientState(PlayerState newTickState)
         {
-            if (websocket.State != WebSocketState.Open || !Started) return;
+            if (websocket?.State != WebSocketState.Open || !Started) return;
 
             var playerStateJson = JsonUtility.ToJson(newTickState);
             await websocket.SendText(playerStateJson);
