@@ -62,7 +62,6 @@ public static class DebugMenu
         {
             var jsonResponse = JsonUtility.ToJson(response, true);
             Debug.Log($"{nameof(LastStartableGame)} : {jsonResponse}");
-
             LastStartableGame.started = true;
         });
     }
@@ -84,8 +83,8 @@ public static class DebugMenu
         {
             var jsonResponse = JsonUtility.ToJson(response, true);
             Debug.Log($"{nameof(JoinLastJoinableGame)} : {jsonResponse}");
-
             LastJoinableGame.players++;
+            GameController.Instance.PlayerState.id = response.id;
         });
     }
 

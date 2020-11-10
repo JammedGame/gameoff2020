@@ -12,6 +12,7 @@ namespace Communication
     {
         public event Action<GlobalState> OnAuthoritativeStateRecieved;
 
+        // TODO: get this from server
         public const int PlayersPerGame = 4;
         private const string ApiUrlBase = "http://localhost:8080/";
         private const string ApiUrlWebsocket = "ws://localhost:8080";
@@ -20,7 +21,7 @@ namespace Communication
 
         private WebSocket websocket;
 
-        public bool Started { get; private set; }
+        public bool IsStarted { get; private set; }
 
         private void Start()
         {
@@ -177,7 +178,7 @@ namespace Communication
             if (message.type == WebsocketMessageType.start.ToString())
             {
                 Debug.Log($"Game started : {messageData}");
-                Started = true;
+                IsStarted = true;
             }
             else if (message.type == WebsocketMessageType.state.ToString())
             {
@@ -190,7 +191,7 @@ namespace Communication
 
         public async void SendClientState(PlayerState newTickState)
         {
-            if (websocket?.State != WebSocketState.Open || !Started) return;
+            if (websocket?.State != WebSocketState.Open || !IsStarted) return;
 
             var playerStateJson = JsonUtility.ToJson(newTickState);
             await websocket.SendText(playerStateJson);

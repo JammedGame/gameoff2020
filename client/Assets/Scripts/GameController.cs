@@ -7,6 +7,8 @@ using System.Collections.Generic;
 
 public class GameController : MonoBehaviour
 {
+    private const float SendClientStateRate = 0.3f;
+
     public static GameController Instance { get; private set; }
 
     public CameraController cameraController;
@@ -15,8 +17,10 @@ public class GameController : MonoBehaviour
     private readonly List<Fighter> fighters = new List<Fighter>();
     private readonly List<WeaponProjectile> projectiles = new List<WeaponProjectile>();
     private Fighter player;
+    private float timeSinceLastSendClientState = SendClientStateRate;
 
     public GlobalState GlobalState { get; private set; }
+    public PlayerState PlayerState => player.State;
 
     private void Start()
     {
@@ -36,7 +40,7 @@ public class GameController : MonoBehaviour
             planetView.Planet = planet;
         }
 
-        player = new Fighter(FighterType.BasicFighter.GetSettings(), new PlayerState
+        player = new Fighter(FighterType.Mosquito.GetSettings(), new PlayerState
         {
             id = "1",
             position = new Vector3(0, 0, -800f),
@@ -90,6 +94,25 @@ public class GameController : MonoBehaviour
         {
             projectile.Tick(dT);
         }
+
+        SendClientStateIfNecessary(dT);
+    }
+
+    private void SendClientStateIfNecessary(float dT)
+    {
+        if (!MoonshotServer.Instance.IsStarted) return;
+
+        timeSinceLastSendClientState += dT;
+        if (timeSinceLastSendClientState > SendClientStateRate)
+        {
+            timeSinceLastSendClientState = 0f;
+            MoonshotServer.Instance.SendClientState(player.State);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        MoonshotServer.Instance.OnAuthoritativeStateRecieved -= LoadAuthoritativeState;
     }
 
     public void AddProjectile(WeaponProjectile projectile)
@@ -98,10 +121,5 @@ public class GameController : MonoBehaviour
         
         var projectileView = Instantiate(Resources.Load<WeaponProjectileView>("Prefabs/WeaponProjectileView"));
         projectileView.WeaponProjectile = projectile;
-    }
-
-    private void OnDestroy()
-    {
-        MoonshotServer.Instance.OnAuthoritativeStateRecieved -= LoadAuthoritativeState;
     }
 }

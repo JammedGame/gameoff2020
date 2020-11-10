@@ -133,7 +133,7 @@ namespace Communication
 	[Serializable]
 	public class GlobalState
 	{
-		public List<PlayerState> players;
+		public readonly List<PlayerState> players = new List<PlayerState>();
 		public ObjectiveState objective;
 
 		public void CopyFrom(GlobalState newState, string excludePlayerId)
@@ -151,13 +151,13 @@ namespace Communication
 	/// State of the player ship for one tick.
 	/// </summary>
 	[Serializable]
-	public struct PlayerState
+	public class PlayerState
 	{
 		public string id;
 		public Vector3 position;
 		public Quaternion rotation;
 		public Vector3 velocity;
-		public List<ProjectileState> projectiles;
+		public readonly List<ProjectileState> projectiles = new List<ProjectileState>();
 
 		public void CopyFrom(PlayerState newState)
 		{
@@ -178,7 +178,7 @@ namespace Communication
 	/// State of a projectile for one tick.
 	/// </summary>
 	[Serializable]
-	public struct ProjectileState
+	public class ProjectileState
 	{
 		public string id;
 		public Vector3 position;
@@ -195,7 +195,7 @@ namespace Communication
 	}
 
 	[Serializable]
-	public struct ObjectiveState
+	public class ObjectiveState
 	{
 		public float affinity;
 	}
