@@ -31,6 +31,7 @@ namespace Communication
                 Destroy(gameObject);
                 return;
             }
+            DontDestroyOnLoad(gameObject);
         }
 
         private void Update()
