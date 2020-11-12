@@ -57,6 +57,7 @@ public class MainMenuController : MonoBehaviour
         mainMenu.SetActive(false);
         options.SetActive(true);
     }
+    
     public void ClickCredits()
     {
         mainMenu.SetActive(false);
@@ -69,5 +70,11 @@ public class MainMenuController : MonoBehaviour
         #elif !UNITY_WEBGL
             Application.Quit();
         #endif
+    }
+
+    public void ClickBackToMainMenu(GameObject currentItem)
+    {
+        currentItem.SetActive(false);
+        mainMenu.SetActive(true);
     }
 }
