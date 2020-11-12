@@ -35,7 +35,7 @@ public class GameController : MonoBehaviour
         {
             var planet = new Planet(planetSettings);
             Planets.Add(planet);
-            
+
             var planetView = GameObject.Instantiate(Resources.Load<PlanetView>("Prefabs/PlanetView"));
             planetView.Planet = planet;
         }
@@ -77,18 +77,18 @@ public class GameController : MonoBehaviour
             planet.Tick(dT);
         }
 
-        player.SetPlayerInput(
-            Quaternion.Euler(-Input.GetAxisRaw("Mouse Y"), Input.GetAxisRaw("Mouse X"), 0),
-            Input.GetAxisRaw("Horizontal") * Vector3.right + Input.GetAxisRaw("Vertical") * Vector3.forward,
-            Input.GetKey("space")
-        );
+        var currentInput = new FighterInput()
+        {
+            Rotation = Quaternion.Euler(-Input.GetAxisRaw("Mouse Y"), Input.GetAxisRaw("Mouse X"), 0),
+            Acceleration = Input.GetAxisRaw("Horizontal") * Vector3.right + Input.GetAxisRaw("Vertical") * Vector3.forward,
+            Shoot = Input.GetKey(KeyCode.Space)
+        };
+        player.SetPlayerInput(currentInput);
 
         foreach (var fighter in fighters)
         {
             fighter.Tick(dT);
         }
-
-        player.ClearPlayerInput();
 
         foreach (var projectile in projectiles)
         {
@@ -118,7 +118,7 @@ public class GameController : MonoBehaviour
     public void AddProjectile(WeaponProjectile projectile)
     {
         projectiles.Add(projectile);
-        
+
         var projectileView = Instantiate(Resources.Load<WeaponProjectileView>("Prefabs/WeaponProjectileView"));
         projectileView.WeaponProjectile = projectile;
     }

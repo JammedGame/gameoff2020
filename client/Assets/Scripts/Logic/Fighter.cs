@@ -4,15 +4,19 @@ using UnityEngine;
 
 namespace Logic
 {
+    public struct FighterInput
+    {
+        public Quaternion Rotation;
+        public Vector3 Acceleration;
+        public bool Shoot;
+    }
+
     public class Fighter
     {
         private FighterSettings settings;
         private PlayerState state;
         private float timeSinceLastShot;
-        private Quaternion inputRotation;
-        private Vector3 inputAcceleration;
-        private bool inputShoot;
-
+        private FighterInput currentInput;
         public PlayerState State => state;
         public string PlayerId => state.id;
         public Vector3 Position => state.position;
@@ -20,22 +24,24 @@ namespace Logic
 
         public Fighter(FighterSettings settings, PlayerState state) => (this.settings, this.state) = (settings, state);
 
-        public void SetPlayerInput(Quaternion inputRotation, Vector3 inputAcceleration, bool inputShoot)
-            => (this.inputRotation, this.inputAcceleration, this.inputShoot) = (inputRotation, inputAcceleration, inputShoot);
-
-        public void ClearPlayerInput()
-            => (inputRotation, inputAcceleration, inputShoot) = (Quaternion.identity, Vector3.zero, false);
+        public void SetPlayerInput(FighterInput command) => currentInput = command;
 
         public void Tick(float dT)
         {
+            state = Simulate(state, currentInput, dT);
+        }
+
+        public PlayerState Simulate(PlayerState previousState, FighterInput input, float dT)
+        {
             // rotate
-            state.rotation *= inputRotation;
+            var state = previousState;
+            state.rotation *= input.Rotation;
 
             // speed fall off
             var newVelocity = Vector3.Lerp(state.velocity, Vector3.zero, settings.speedFallOff * dT);
 
             // accelerate
-            var controllerAcceleration = state.rotation * inputAcceleration * settings.acceleration;
+            var controllerAcceleration = state.rotation * input.Acceleration * settings.acceleration;
             var gravityAcceleration = GravityController.Instance.getGravityAcceleration(state.position);
             newVelocity += (controllerAcceleration + gravityAcceleration) * dT;
 
@@ -48,10 +54,11 @@ namespace Logic
 
             // shoot
             timeSinceLastShot += dT;
-            if (inputShoot && timeSinceLastShot >= settings.attackSpeed) Shoot();
+            if (input.Shoot && timeSinceLastShot >= settings.attackSpeed) Shoot();
+            return state;
         }
 
-        private void Shoot() 
+        private void Shoot()
         {
             timeSinceLastShot = 0;
 
