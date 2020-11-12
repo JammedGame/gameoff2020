@@ -16,7 +16,8 @@ namespace Settings
         public float boostSpeed;
         public float brakeSpeed;
         public float velocitySmooth;
-        public float steeringSpeed;
+        public float steerSpeed;
+        public float rollSpeed;
         public float attackSpeed;
         public float projectileSpeed;
     }

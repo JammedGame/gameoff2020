@@ -41,14 +41,21 @@ namespace Logic
             state.CopyFrom(previousState);
 
             // rotate
-            state.rotation *= Quaternion.Euler(-input.SteerTarget.y * settings.steeringSpeed, input.SteerTarget.x * settings.steeringSpeed, 0);
+            var newRotation = state.rotation;
+            newRotation *= Quaternion.Euler(
+                -input.SteerTarget.y * settings.steerSpeed * dT,
+                input.SteerTarget.x * settings.steerSpeed * dT,
+                -input.Roll * settings.rollSpeed * dT
+            );
+            state.rotation = newRotation;
 
             // velocity
             var targetSpeed = input.Throttle >= 0
                 ? Mathf.Lerp(settings.defaultSpeed, settings.boostSpeed, input.Throttle)
                 : Mathf.Lerp(settings.defaultSpeed, settings.brakeSpeed, -input.Throttle);
-            var targetVelocity = state.rotation * Vector3.forward * targetSpeed;
-            var newVelocity = Vector3.Lerp(state.velocity, targetVelocity, Mathf.Exp(-settings.velocitySmooth / dT));
+            var targetVelocity = newRotation * Vector3.forward * targetSpeed;
+            var newVelocity = state.velocity;
+            newVelocity = Vector3.Lerp(newVelocity, targetVelocity, Mathf.Exp(-settings.velocitySmooth / dT));
             state.velocity = newVelocity;
 
             // move
