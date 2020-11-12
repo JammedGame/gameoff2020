@@ -17,5 +17,6 @@ namespace Settings
         public float speedFallOff;
         public float attackSpeed;
         public float projectileSpeed;
+        public float steeringSpeed;
     }
 }

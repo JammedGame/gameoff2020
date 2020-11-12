@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Communication;
 using View;
 using Logic;
@@ -79,9 +79,11 @@ public class GameController : MonoBehaviour
             planet.Tick(dT);
         }
 
+        var mousePositionRelative = new Vector2(Input.mousePosition.x / Screen.width, Input.mousePosition.y / Screen.height);
+        mousePositionRelative = Vector2.ClampMagnitude(2 * mousePositionRelative - Vector2.one, 1f);
         var currentInput = new FighterInput()
         {
-            Rotation = Quaternion.Euler(-Input.GetAxisRaw("Mouse Y"), Input.GetAxisRaw("Mouse X"), 0),
+            CrosshairPosition = mousePositionRelative,
             Acceleration = Input.GetAxisRaw("Horizontal") * Vector3.right + Input.GetAxisRaw("Vertical") * Vector3.forward,
             Shoot = Input.GetKey(KeyCode.Space)
         };

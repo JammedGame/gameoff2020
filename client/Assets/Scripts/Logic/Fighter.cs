@@ -6,7 +6,7 @@ namespace Logic
 {
     public struct FighterInput
     {
-        public Quaternion Rotation;
+        public Vector2 CrosshairPosition;
         public Vector3 Acceleration;
         public bool Shoot;
     }
@@ -17,6 +17,7 @@ namespace Logic
         private PlayerState state;
         private float timeSinceLastShot;
         private FighterInput currentInput;
+
         public PlayerState State => state;
         public string PlayerId => state.id;
         public Vector3 Position => state.position;
@@ -35,7 +36,7 @@ namespace Logic
         {
             // rotate
             var state = previousState;
-            state.rotation *= input.Rotation;
+            state.rotation *= Quaternion.Euler(-input.CrosshairPosition.y * settings.steeringSpeed, input.CrosshairPosition.x * settings.steeringSpeed, 0);
 
             // speed fall off
             var newVelocity = Vector3.Lerp(state.velocity, Vector3.zero, settings.speedFallOff * dT);
