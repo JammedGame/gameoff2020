@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3562641d883daaa43b48bdabb132a348, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: 
-  GravityCoefficient: 0
+  GravityCoefficient: 0.0000001
   LevelSettings:
   - id: 1
     planetSettings:
@@ -31,9 +31,10 @@ MonoBehaviour:
       innerAtmosphereDensity: 1
   FighterSettings:
   - type: 1
-    maxSpeed: 25
-    acceleration: 10
-    speedFallOff: 0
+    defaultSpeed: 10
+    boostSpeed: 50
+    brakeSpeed: 2
+    velocitySmooth: 0.02
+    steeringSpeed: 0.33
     attackSpeed: 0.1
     projectileSpeed: 100
-    steeringSpeed: 0.33

@@ -7,7 +7,8 @@ namespace Logic
     public struct FighterInput
     {
         public Vector2 SteerTarget;
-        public Vector3 Acceleration;
+        public float Throttle;
+        public float Roll;
         public Quaternion ShootDirection;
         public bool Shoot;
         public bool Drift;
@@ -36,20 +37,18 @@ namespace Logic
 
         public PlayerState Simulate(PlayerState previousState, FighterInput input, float dT)
         {
+            var state = new PlayerState();
+            state.CopyFrom(previousState);
+
             // rotate
-            var state = previousState;
             state.rotation *= Quaternion.Euler(-input.SteerTarget.y * settings.steeringSpeed, input.SteerTarget.x * settings.steeringSpeed, 0);
 
-            // speed fall off
-            var newVelocity = Vector3.Lerp(state.velocity, Vector3.zero, settings.speedFallOff * dT);
-
-            // accelerate
-            var controllerAcceleration = state.rotation * input.Acceleration * settings.acceleration;
-            var gravityAcceleration = GravityController.Instance.getGravityAcceleration(state.position);
-            newVelocity += (controllerAcceleration + gravityAcceleration) * dT;
-
-            // clamp speed
-            newVelocity = Vector3.ClampMagnitude(newVelocity, settings.maxSpeed);
+            // velocity
+            var targetSpeed = input.Throttle >= 0
+                ? Mathf.Lerp(settings.defaultSpeed, settings.boostSpeed, input.Throttle)
+                : Mathf.Lerp(settings.defaultSpeed, settings.brakeSpeed, -input.Throttle);
+            var targetVelocity = state.rotation * Vector3.forward * targetSpeed;
+            var newVelocity = Vector3.Lerp(state.velocity, targetVelocity, Mathf.Exp(-settings.velocitySmooth / dT));
             state.velocity = newVelocity;
 
             // move

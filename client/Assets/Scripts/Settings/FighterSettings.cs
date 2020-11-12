@@ -12,11 +12,12 @@ namespace Settings
     public class FighterSettings
     {
         public FighterType type;
-        public float maxSpeed;
-        public float acceleration;
-        public float speedFallOff;
+        public float defaultSpeed;
+        public float boostSpeed;
+        public float brakeSpeed;
+        public float velocitySmooth;
+        public float steeringSpeed;
         public float attackSpeed;
         public float projectileSpeed;
-        public float steeringSpeed;
     }
 }
