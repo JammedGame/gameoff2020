@@ -40,8 +40,11 @@ namespace Logic
             var state = new PlayerState();
             state.CopyFrom(previousState);
 
+            // Debug.Log(GameController.Instance.IsInAtmosphere(Position).ToString());
+
             // rotate
-            var newRotation = state.rotation * Quaternion.Euler(
+            var newRotation = state.rotation;
+            newRotation *= Quaternion.Euler(
                 -input.SteerTarget.y * settings.steerSpeed * dT,
                 input.SteerTarget.x * settings.steerSpeed * dT,
                 -input.Roll * settings.rollSpeed * dT
@@ -49,12 +52,16 @@ namespace Logic
             state.rotation = newRotation;
 
             // velocity
-            var targetSpeed = input.Throttle >= 0
-                ? Mathf.Lerp(settings.defaultSpeed, settings.boostSpeed, input.Throttle)
-                : Mathf.Lerp(settings.defaultSpeed, settings.brakeSpeed, -input.Throttle);
-            var targetVelocity = newRotation * Vector3.forward * targetSpeed;
-            var newVelocity = Vector3.Lerp(state.velocity, targetVelocity, Mathf.Exp(-settings.velocitySmooth / dT));
-            state.velocity = newVelocity;
+            var newVelocity = state.velocity;
+            if (!input.Drift)
+            {
+                var targetSpeed = input.Throttle >= 0
+                    ? Mathf.Lerp(settings.defaultSpeed, settings.boostSpeed, input.Throttle)
+                    : Mathf.Lerp(settings.defaultSpeed, settings.brakeSpeed, -input.Throttle);
+                var targetVelocity = newRotation * Vector3.forward * targetSpeed;
+                newVelocity = Vector3.Lerp(newVelocity, targetVelocity, Mathf.Exp(-settings.velocitySmooth / dT));
+                state.velocity = newVelocity;
+            }
 
             // move
             state.position += newVelocity * dT;

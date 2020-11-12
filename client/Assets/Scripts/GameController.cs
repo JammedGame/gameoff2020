@@ -126,6 +126,23 @@ public class GameController : MonoBehaviour
         MoonshotServer.Instance.OnAuthoritativeStateRecieved -= LoadAuthoritativeState;
     }
 
+    public Vector3 GetGravityAcceleration(Vector3 position)
+    {
+        var gravityCoefficient = GameSettings.Instance.GravityCoefficient;
+        var gravityAcceleration = Vector3.zero;
+        foreach (var planet in Planets)
+        {
+            gravityAcceleration += ((gravityCoefficient * planet.Mass) / Mathf.Pow(Vector3.Distance(position, planet.Position), 2)) * (planet.Position - position);
+        }
+
+        return gravityAcceleration;
+    }
+
+    public bool IsInAtmosphere(Vector3 position)
+    {
+        return Planets.Exists(p => Vector3.Distance(position, p.Position) <= p.RadiusIncludingAtmosphere);
+    }
+
     public void AddProjectile(WeaponProjectile projectile)
     {
         projectiles.Add(projectile);

@@ -18,7 +18,7 @@ namespace View
             t.localRotation = Planet.Rotation;
             t.localScale = Planet.Settings.scale;
 
-            var atmosphereHeight = Planet.Settings.scale.x * (Planet.Settings.atmosphereScale - 1);
+            var atmosphereHeight = Planet.AtmosphereHeight;
             var surfaceObject = Instantiate(Planet.Settings.surfacePrefab, t);
             surface = surfaceObject.GetComponent<MeshRenderer>();
             if (surface.materials.Length > 0)
