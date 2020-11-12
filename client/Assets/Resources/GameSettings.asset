@@ -35,6 +35,7 @@ MonoBehaviour:
     boostSpeed: 50
     brakeSpeed: 2
     velocitySmooth: 0.02
-    steeringSpeed: 0.33
+    steerSpeed: 50
+    rollSpeed: 50
     attackSpeed: 0.1
     projectileSpeed: 100
