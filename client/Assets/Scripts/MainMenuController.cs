@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using Communication;
 using UnityEngine;
@@ -25,6 +25,8 @@ public class MainMenuController : MonoBehaviour
         #if UNITY_WEBGL && !UNITY_EDITOR
             exitButton.SetActive(false);
         #endif
+
+        Cursor.SetCursor(Resources.Load<Texture2D>("Textures/Crosshair"), new Vector2(16f, 16f), CursorMode.Auto);
     }
 
     public void CreateGame()

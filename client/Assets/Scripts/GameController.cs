@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using Communication;
 using View;
 using Logic;
@@ -52,6 +52,8 @@ public class GameController : MonoBehaviour
         var playerView = Instantiate(Resources.Load<FighterView>("Prefabs/FighterView"));
         playerView.Fighter = player;
         cameraController.target = playerView.transform;
+
+        Cursor.SetCursor(Resources.Load<Texture2D>("Textures/Crosshair"), new Vector2(16f, 16f), CursorMode.Auto);
 
         MoonshotServer.Instance.OnAuthoritativeStateRecieved += LoadAuthoritativeState;
     }
