@@ -79,13 +79,19 @@ public class GameController : MonoBehaviour
             planet.Tick(dT);
         }
 
-        var mousePositionRelative = new Vector2(Input.mousePosition.x / Screen.width, Input.mousePosition.y / Screen.height);
-        mousePositionRelative = Vector2.ClampMagnitude(2 * mousePositionRelative - Vector2.one, 1f);
-        var currentInput = new FighterInput()
+        var steerTarget = new Vector2(
+            Mathf.Clamp(2 * Input.mousePosition.x / Screen.width - 1f, -1f, 1f) * Screen.width / Screen.height,
+            Mathf.Clamp(2 * Input.mousePosition.y / Screen.height - 1f, -1f, 1f)
+        );
+        steerTarget = Vector2.ClampMagnitude(steerTarget, 1f);
+        var shootAngle = steerTarget * (Camera.main.fieldOfView * 0.5f);
+        var currentInput = new FighterInput
         {
-            CrosshairPosition = mousePositionRelative,
+            SteerTarget = steerTarget,
             Acceleration = Input.GetAxisRaw("Horizontal") * Vector3.right + Input.GetAxisRaw("Vertical") * Vector3.forward,
-            Shoot = Input.GetKey(KeyCode.Space)
+            ShootDirection = Quaternion.Euler(-shootAngle.y, shootAngle.x, 0),
+            Shoot = Input.GetButton("Fire1"),
+            Drift = Input.GetButton("Fire3"),
         };
         player.SetPlayerInput(currentInput);
 

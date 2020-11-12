@@ -6,9 +6,11 @@ namespace Logic
 {
     public struct FighterInput
     {
-        public Vector2 CrosshairPosition;
+        public Vector2 SteerTarget;
         public Vector3 Acceleration;
+        public Quaternion ShootDirection;
         public bool Shoot;
+        public bool Drift;
     }
 
     public class Fighter
@@ -25,7 +27,7 @@ namespace Logic
 
         public Fighter(FighterSettings settings, PlayerState state) => (this.settings, this.state) = (settings, state);
 
-        public void SetPlayerInput(FighterInput command) => currentInput = command;
+        public void SetPlayerInput(FighterInput input) => currentInput = input;
 
         public void Tick(float dT)
         {
@@ -36,7 +38,7 @@ namespace Logic
         {
             // rotate
             var state = previousState;
-            state.rotation *= Quaternion.Euler(-input.CrosshairPosition.y * settings.steeringSpeed, input.CrosshairPosition.x * settings.steeringSpeed, 0);
+            state.rotation *= Quaternion.Euler(-input.SteerTarget.y * settings.steeringSpeed, input.SteerTarget.x * settings.steeringSpeed, 0);
 
             // speed fall off
             var newVelocity = Vector3.Lerp(state.velocity, Vector3.zero, settings.speedFallOff * dT);
@@ -55,18 +57,19 @@ namespace Logic
 
             // shoot
             timeSinceLastShot += dT;
-            if (input.Shoot && timeSinceLastShot >= settings.attackSpeed) Shoot();
+            if (input.Shoot && timeSinceLastShot >= settings.attackSpeed) Shoot(input.ShootDirection);
             return state;
         }
 
-        private void Shoot()
+        private void Shoot(Quaternion shootDirection)
         {
             timeSinceLastShot = 0;
 
+            var projectileRotation = state.rotation * shootDirection;
             var projectile = new WeaponProjectile(
                 state.position,
-                state.rotation,
-                state.velocity + state.rotation * Vector3.forward * settings.projectileSpeed
+                projectileRotation,
+                state.velocity + projectileRotation * Vector3.forward * settings.projectileSpeed
             );
             GameController.Instance.AddProjectile(projectile);
         }

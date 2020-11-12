@@ -34,6 +34,6 @@ MonoBehaviour:
     maxSpeed: 25
     acceleration: 10
     speedFallOff: 0
-    attackSpeed: 1
+    attackSpeed: 0.1
     projectileSpeed: 100
     steeringSpeed: 0.33
