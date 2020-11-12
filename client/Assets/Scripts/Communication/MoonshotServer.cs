@@ -25,12 +25,13 @@ namespace Communication
 
         private void Start()
         {
-            if (Instance == null) Instance = this;
-            else
+            if (Instance != null)
             {
                 Destroy(gameObject);
                 return;
             }
+
+            Instance = this;
             DontDestroyOnLoad(gameObject);
         }
 

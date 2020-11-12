@@ -24,13 +24,13 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-        if (Instance == null) Instance = this;
-        else
+        if (Instance != null)
         {
             Destroy(gameObject);
             return;
         }
 
+        Instance = this;
         foreach (var planetSettings in LevelId.LevelOne.GetSettings().planetSettings)
         {
             var planet = new Planet(planetSettings);
