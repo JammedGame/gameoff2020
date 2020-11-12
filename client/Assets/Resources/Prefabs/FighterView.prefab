@@ -126,6 +126,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FighterMosquito
       objectReference: {fileID: 0}
+    - target: {fileID: 1667647360277011130, guid: 72d23e2201e87e74f8ef19dc78e2d2fb,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72d23e2201e87e74f8ef19dc78e2d2fb, type: 3}
 --- !u!4 &3846348422361944571 stripped
