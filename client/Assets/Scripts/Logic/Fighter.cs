@@ -67,7 +67,7 @@ namespace Logic
 
             // shoot
             timeSinceLastShot += dT;
-            if (input.Shoot && timeSinceLastShot >= settings.attackSpeed) Shoot(input.ShootDirection);
+            if (input.Throttle <= 0 && input.Shoot && timeSinceLastShot >= settings.attackSpeed) Shoot(input.ShootDirection);
             return state;
         }
 
