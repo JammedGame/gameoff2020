@@ -21,4 +21,9 @@ public class LobbyGameItem : MonoBehaviour
     {
         gameNameTextField.text = gameName;
     }
+
+    public void Destroy()
+    {
+        this.Destroy();
+    }
 }

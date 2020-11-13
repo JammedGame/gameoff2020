@@ -20,6 +20,8 @@ public class MainMenuController : MonoBehaviour
 
     public GameObject exitButton;
 
+    public LobbyController lobbyController;
+
     void Start()
     {
         #if UNITY_WEBGL && !UNITY_EDITOR
@@ -33,6 +35,7 @@ public class MainMenuController : MonoBehaviour
     {
         mainMenu.SetActive(false);
         lobby.SetActive(true);
+        lobbyController.OnEnter();
     }
 
     public void ClickOptions()
