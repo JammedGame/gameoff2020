@@ -57,8 +57,8 @@ namespace Logic
                 var targetSpeed = input.Throttle >= 0
                     ? Mathf.Lerp(settings.defaultSpeed, settings.boostSpeed, input.Throttle)
                     : Mathf.Lerp(settings.defaultSpeed, settings.brakeSpeed, -input.Throttle);
-                var targetVelocity = newRotation * Vector3.forward * targetSpeed;
-                newVelocity = Vector3.Lerp(newVelocity, targetVelocity, Mathf.Exp(-settings.velocitySmooth / dT));
+                var newSpeed = Mathf.Lerp(newVelocity.magnitude, targetSpeed, Mathf.Exp(-settings.velocitySmooth / dT));
+                newVelocity = newRotation * Vector3.forward * newSpeed;
                 state.velocity = newVelocity;
             }
 
