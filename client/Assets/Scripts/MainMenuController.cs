@@ -29,27 +29,10 @@ public class MainMenuController : MonoBehaviour
         Cursor.SetCursor(Resources.Load<Texture2D>("Textures/Crosshair"), new Vector2(16f, 16f), CursorMode.Auto);
     }
 
-    public void CreateGame()
-    {
-        var DebugGameName = "dusantest";
-
-        // create game
-        MoonshotServer.Instance.CreateGame(new CreateGameRequest
-        {
-            name = DebugGameName,
-        }, response =>
-        {
-            var jsonResponse = JsonUtility.ToJson(response, true);
-            Debug.Log($"{nameof(CreateGame)} : {jsonResponse}");
-        });
-    }
-
     public void ClickStartGame()
     {
         mainMenu.SetActive(false);
         lobby.SetActive(true);
-
-        CreateGame();
     }
 
     public void ClickOptions()
