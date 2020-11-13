@@ -43,9 +43,13 @@ namespace Logic
 
             // rotate
             var newRotation = state.rotation;
+            var steerSpeedX = -input.SteerTarget.y;
+            var steerSpeedY = input.SteerTarget.x;
+            steerSpeedX = Mathf.Sign(steerSpeedX) * settings.steerSpeedCurve.Evaluate(Mathf.Abs(steerSpeedX));
+            steerSpeedY = Mathf.Sign(steerSpeedY) * settings.steerSpeedCurve.Evaluate(Mathf.Abs(steerSpeedY));
             newRotation *= Quaternion.Euler(
-                -input.SteerTarget.y * settings.steerSpeed * dT,
-                input.SteerTarget.x * settings.steerSpeed * dT,
+                steerSpeedX * dT,
+                steerSpeedY * dT,
                 -input.Roll * settings.rollSpeed * dT
             );
             state.rotation = newRotation;
@@ -54,10 +58,9 @@ namespace Logic
             var newVelocity = state.velocity;
             if (!input.Drift)
             {
-                var targetSpeed = input.Throttle >= 0
+                var newSpeed = input.Throttle >= 0
                     ? Mathf.Lerp(settings.defaultSpeed, settings.boostSpeed, input.Throttle)
                     : Mathf.Lerp(settings.defaultSpeed, settings.brakeSpeed, -input.Throttle);
-                var newSpeed = Mathf.Lerp(newVelocity.magnitude, targetSpeed, Mathf.Exp(-settings.velocitySmooth / dT));
                 newVelocity = newRotation * Vector3.forward * newSpeed;
                 state.velocity = newVelocity;
             }

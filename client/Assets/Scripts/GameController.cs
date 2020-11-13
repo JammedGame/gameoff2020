@@ -88,8 +88,8 @@ public class GameController : MonoBehaviour
         var currentInput = new FighterInput
         {
             SteerTarget = steerTarget,
-            Throttle = Input.GetAxisRaw("Vertical"),
-            Roll = Input.GetAxisRaw("Horizontal"),
+            Throttle = Input.GetAxis("Vertical"),
+            Roll = Input.GetAxis("Horizontal"),
             ShootDirection = Quaternion.Euler(-shootAngle.y, shootAngle.x, 0),
             Shoot = Input.GetButton("Fire1"),
             Drift = Input.GetButton("Fire3"),

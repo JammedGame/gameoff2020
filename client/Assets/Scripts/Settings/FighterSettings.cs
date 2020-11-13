@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace Settings
 {
@@ -15,8 +16,7 @@ namespace Settings
         public float defaultSpeed;
         public float boostSpeed;
         public float brakeSpeed;
-        public float velocitySmooth;
-        public float steerSpeed;
+        public AnimationCurve steerSpeedCurve;
         public float rollSpeed;
         public float attackSpeed;
         public float projectileSpeed;

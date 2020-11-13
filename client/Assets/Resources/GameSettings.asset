@@ -34,8 +34,39 @@ MonoBehaviour:
     defaultSpeed: 15
     boostSpeed: 150
     brakeSpeed: 1.5
-    velocitySmooth: 0.0225
-    steerSpeed: 75
+    steerSpeedCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.05
+        value: 0
+        inSlope: -0.61438197
+        outSlope: -0.61438197
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.0030099286
+      - serializedVersion: 3
+        time: 1
+        value: 150
+        inSlope: 274.8139
+        outSlope: 274.8139
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.1261574
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
     rollSpeed: 120
     attackSpeed: 0.1
     projectileSpeed: 30
