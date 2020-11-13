@@ -138,9 +138,9 @@ public class GameController : MonoBehaviour
         return gravityAcceleration;
     }
 
-    public bool IsInAtmosphere(Vector3 position)
+    public Planet IsInAtmosphereOfPlanet(Vector3 position)
     {
-        return Planets.Exists(p => Vector3.Distance(position, p.Position) <= p.RadiusIncludingAtmosphere);
+        return Planets.Find(p => Vector3.Distance(position, p.Position) <= p.RadiusIncludingAtmosphere);
     }
 
     public void AddProjectile(WeaponProjectile projectile)

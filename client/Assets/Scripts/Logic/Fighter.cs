@@ -25,6 +25,7 @@ namespace Logic
         public string PlayerId => state.id;
         public Vector3 Position => state.position;
         public Quaternion Rotation => state.rotation;
+        public Planet IsInAtmosphereOfPlanet => GameController.Instance.IsInAtmosphereOfPlanet(Position);
 
         public Fighter(FighterSettings settings, PlayerState state) => (this.settings, this.state) = (settings, state);
 
@@ -39,8 +40,6 @@ namespace Logic
         {
             var state = new PlayerState();
             state.CopyFrom(previousState);
-
-            // Debug.Log(GameController.Instance.IsInAtmosphere(Position).ToString());
 
             // rotate
             var newRotation = state.rotation;

@@ -13,6 +13,30 @@ MonoBehaviour:
   m_Name: GameSettings
   m_EditorClassIdentifier: 
   GravityCoefficient: 0.0000001
+  AtmosphereEntryCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: -0.0006874565
+      outSlope: -0.0006874565
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0
+      outWeight: 0.7415706
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.0045853187
+      outSlope: 0.0045853187
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.7434919
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   LevelSettings:
   - id: 1
     planetSettings:
@@ -35,7 +59,7 @@ MonoBehaviour:
     boostSpeed: 50
     brakeSpeed: 2
     velocitySmooth: 0.02
-    steerSpeed: 50
-    rollSpeed: 50
+    steerSpeed: 75
+    rollSpeed: 120
     attackSpeed: 0.1
     projectileSpeed: 100
