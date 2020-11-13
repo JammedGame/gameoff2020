@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class LobbyController : MonoBehaviour
 {
-
+    public GameObject gameItemContainer;
     private readonly static List<GameSetupData> games = new List<GameSetupData>();
+    private List<LobbyGameItem> gameItems = new List<LobbyGameItem>();
 
     // Start is called before the first frame update
     void Start()
@@ -38,11 +39,21 @@ public class LobbyController : MonoBehaviour
             int x = 50;
             int y = 50;
             games.ForEach((game) => {
-                var gameItem = Instantiate(Resources.Load<LobbyGameItem>("Prefabs/LobbyGameItem"));
+                var gameItem = Instantiate(Resources.Load<LobbyGameItem>("Prefabs/LobbyGameItem"), gameItemContainer.transform);
                 gameItem.SetGameName(game.name);
+                gameItems.Add(gameItem);
                 gameItem.transform.localPosition = new Vector3(0, y + y * i, 0);
             });
         });
 
+    }
+
+    public void ClearList()
+    {
+    }
+
+    public void OnEnter()
+    {
+        ClearList();
     }
 }
