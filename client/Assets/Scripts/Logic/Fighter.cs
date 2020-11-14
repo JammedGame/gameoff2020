@@ -26,6 +26,7 @@ namespace Logic
         public bool IsPlayer => PlayerId == GameController.Instance.PlayerState.id;
         public Vector3 Position => state.position;
         public Quaternion Rotation => state.rotation;
+        public Vector3 Velocity => state.velocity;
         public Planet IsInAtmosphereOfPlanet => GameController.Instance.IsInAtmosphereOfPlanet(Position);
 
         public Fighter(FighterSettings settings, PlayerState state) => (this.settings, this.state) = (settings, state);

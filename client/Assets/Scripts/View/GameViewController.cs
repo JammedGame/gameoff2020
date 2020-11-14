@@ -48,7 +48,7 @@ namespace View
                 view.Fighter = fighter;
                 fighterViews.Add(fighter, view);
 
-                if (fighter.IsPlayer) cameraController.target = view.transform;
+                if (fighter.IsPlayer) cameraController.target = view;
             }
         }
 

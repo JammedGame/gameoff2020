@@ -1,15 +1,24 @@
 ﻿using UnityEngine;
+using View;
 
 public class CameraController : MonoBehaviour
 {
-    public Transform target;
     public Vector3 followDistance = new Vector3(0, 1f, -1f);
     public Vector3 smooth;
     public AnimationCurve FollowZ;
+    public AnimationCurve SpeedFovEffect;
 
+    Camera cam;
     Vector3 lastPosition;
     float currentZFollow;
     bool firstUpdate;
+
+    public FighterView target { get; set; }
+
+    void Start()
+    {
+        cam = GetComponent<Camera>();
+    }
 
     void LateUpdate()
     {
@@ -20,16 +29,17 @@ public class CameraController : MonoBehaviour
             lastPosition = transform.position;
 
         // rotate
-        transform.rotation = target.rotation;
+        var targetTransform = target.transform;
+        transform.rotation = targetTransform.rotation;
 
         // Define a target position above and behind the target transform
-        var velocityZ = Vector3.Dot(target.position - lastPosition, target.forward) / Time.deltaTime;
+        var velocityZ = Vector3.Dot(targetTransform.position - lastPosition, targetTransform.forward) / Time.deltaTime;
         var targetZFollow = FollowZ.Evaluate(velocityZ);
 
         currentZFollow = !firstUpdate ? targetZFollow : LerpCombine(currentZFollow, targetZFollow, 0.1f, 0.5f);
 
-        var relativeFollow = followDistance.x * target.right + followDistance.y * target.up + currentZFollow * target.forward;
-        var targetPosition = target.position + relativeFollow;
+        var relativeFollow = followDistance.x * targetTransform.right + followDistance.y * targetTransform.up + currentZFollow * targetTransform.forward;
+        var targetPosition = targetTransform.position + relativeFollow;
 
         if (!firstUpdate)
         {
@@ -40,15 +50,17 @@ public class CameraController : MonoBehaviour
 
         var newCameraPos = transform.position;
         var dir = targetPosition - newCameraPos;
-        var dirAlongX = Vector3.Project(dir, target.right);
-        var dirAlongY = Vector3.Project(dir, target.up);
-        var dirAlongZ = Vector3.Project(dir, target.forward);
+        var dirAlongX = Vector3.Project(dir, targetTransform.right);
+        var dirAlongY = Vector3.Project(dir, targetTransform.up);
+        var dirAlongZ = Vector3.Project(dir, targetTransform.forward);
         newCameraPos += dirAlongX * smooth.x;
         newCameraPos += dirAlongY * smooth.y;
         newCameraPos += dirAlongZ * smooth.z;
         transform.position = newCameraPos;
 
-        lastPosition = target.position;
+        cam.fieldOfView = SpeedFovEffect.Evaluate(target.Fighter.Velocity.magnitude);
+
+        lastPosition = targetTransform.position;
     }
 
     public float LerpCombine(float a, float b, float constantDeltaPerSecond, float linearDeltaPerSecond)
