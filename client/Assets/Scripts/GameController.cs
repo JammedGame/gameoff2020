@@ -80,7 +80,7 @@ public class GameController : MonoBehaviour
             Mathf.Clamp(2 * Input.mousePosition.y / Screen.height - 1f, -1f, 1f)
         );
         steerTarget = Vector2.ClampMagnitude(steerTarget, 1f);
-        var shootAngle = steerTarget * (Camera.main.fieldOfView * 0.5f);
+        var shootAngle = Quaternion.identity; //steerTarget * (Camera.main.fieldOfView * 0.5f);
         var currentInput = new FighterInput
         {
             SteerTarget = steerTarget,
