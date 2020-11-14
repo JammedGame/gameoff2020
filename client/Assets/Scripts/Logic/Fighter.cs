@@ -23,6 +23,7 @@ namespace Logic
 
         public PlayerState State => state;
         public string PlayerId => state.id;
+        public bool IsPlayer => PlayerId == GameController.Instance.PlayerState.id;
         public Vector3 Position => state.position;
         public Quaternion Rotation => state.rotation;
         public Planet IsInAtmosphereOfPlanet => GameController.Instance.IsInAtmosphereOfPlanet(Position);
