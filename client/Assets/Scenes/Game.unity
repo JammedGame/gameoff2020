@@ -154,8 +154,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  smoothMovement: 0
-  followDistance: {x: 0, y: 0.1, z: -0.5}
+  followDistance: {x: 0, y: 0.1, z: -0.4}
+  smooth: {x: 0.2, y: 0.2, z: 1}
+  FollowZ:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: -0.42
+      inSlope: -0.0012732669
+      outSlope: -0.0012732669
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.048692517
+    - serializedVersion: 3
+      time: 150
+      value: -0.55
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &348704777
 MonoBehaviour:
   m_ObjectHideFlags: 0
