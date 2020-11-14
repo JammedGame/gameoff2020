@@ -98,9 +98,15 @@ public class GameController : MonoBehaviour
         };
         player.SetPlayerInput(currentInput);
 
-        foreach (var projectile in projectiles)
+		for (int i = 0; i < projectiles.Count; i++)
         {
-            projectile.Tick(dT);
+			var projectile = projectiles[i];
+			projectile.Tick(dT);
+            if (projectile.Time > 10)
+            {
+                projectiles.RemoveAt(i--);
+                continue;
+            }
         }
 
         foreach (var fighter in fighters)
