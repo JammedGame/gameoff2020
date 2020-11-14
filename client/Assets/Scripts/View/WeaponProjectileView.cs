@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace View
 {
-    public class WeaponProjectileView : MonoBehaviour 
+    public class WeaponProjectileView : MonoBehaviour
     {
         public float smoothMovement = 0.8f;
 
@@ -12,6 +12,7 @@ namespace View
         private void Start()
         {
             transform.localPosition = WeaponProjectile.Position;
+            transform.localRotation = WeaponProjectile.Rotation;
         }
 
         private void Update()

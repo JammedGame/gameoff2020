@@ -21,6 +21,7 @@ namespace Logic
         public void Tick(float dT)
         {
             state.position += state.velocity * dT;
+            state.velocity *= 1.01f; // todo: add some kind of initial-max speed thing?
         }
     }
 }

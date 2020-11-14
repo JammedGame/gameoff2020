@@ -20,5 +20,6 @@ namespace Settings
         public float rollSpeed;
         public float attackSpeed;
         public float projectileSpeed;
+        public Vector3 fireOffset;
     }
 }

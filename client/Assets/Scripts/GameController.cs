@@ -98,14 +98,14 @@ public class GameController : MonoBehaviour
         };
         player.SetPlayerInput(currentInput);
 
-        foreach (var fighter in fighters)
-        {
-            fighter.Tick(dT);
-        }
-
         foreach (var projectile in projectiles)
         {
             projectile.Tick(dT);
+        }
+
+        foreach (var fighter in fighters)
+        {
+            fighter.Tick(dT);
         }
 
         SendClientStateIfNecessary(dT);
