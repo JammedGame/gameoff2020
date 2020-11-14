@@ -183,6 +183,7 @@ namespace Communication
 		public string id;
 		public Vector3 position;
 		public Quaternion rotation;
+		public float time;
 		public Vector3 velocity;
 
 		public void CopyFrom(ProjectileState newState)
@@ -191,6 +192,7 @@ namespace Communication
 			position = newState.position;
 			rotation = newState.rotation;
 			velocity = newState.velocity;
+			time = newState.time;
 		}
 	}
 
@@ -208,7 +210,7 @@ namespace Communication
 	{
 		public string type;
 	}
-	
+
 	[Serializable]
 	public struct StateSocketMessage
 	{

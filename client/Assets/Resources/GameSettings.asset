@@ -32,7 +32,7 @@ MonoBehaviour:
   FighterSettings:
   - type: 1
     defaultSpeed: 15
-    boostSpeed: 150
+    boostSpeed: 100
     brakeSpeed: 1.5
     steerSpeedCurve:
       serializedVersion: 2
@@ -69,4 +69,5 @@ MonoBehaviour:
       m_RotationOrder: 4
     rollSpeed: 120
     attackSpeed: 0.1
-    projectileSpeed: 30
+    projectileSpeed: 20
+    fireOffset: {x: 0, y: -0.01, z: 0.02}

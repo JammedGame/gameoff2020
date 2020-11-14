@@ -25,6 +25,8 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
+        Application.targetFrameRate = 60;
+
         if (Instance != null)
         {
             Destroy(gameObject);
@@ -90,14 +92,20 @@ public class GameController : MonoBehaviour
         };
         player.SetPlayerInput(currentInput);
 
+		for (int i = 0; i < Projectiles.Count; i++)
+        {
+			var projectile = Projectiles[i];
+			projectile.Tick(dT);
+            if (projectile.Time > 10)
+            {
+                Projectiles.RemoveAt(i--);
+                continue;
+            }
+        }
+
         foreach (var fighter in Fighters)
         {
             fighter.Tick(dT);
-        }
-
-        foreach (var projectile in Projectiles)
-        {
-            projectile.Tick(dT);
         }
 
         SendClientStateIfNecessary(dT);

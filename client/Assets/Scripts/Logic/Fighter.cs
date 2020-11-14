@@ -35,6 +35,11 @@ namespace Logic
         public void Tick(float dT)
         {
             state = Simulate(state, currentInput, dT);
+
+            if (currentInput.Shoot && timeSinceLastShot >= settings.attackSpeed)
+            {
+                Shoot(currentInput.ShootDirection);
+            }
         }
 
         public PlayerState Simulate(PlayerState previousState, FighterInput input, float dT)
@@ -71,7 +76,6 @@ namespace Logic
 
             // shoot
             timeSinceLastShot += dT;
-            if (input.Throttle <= 0 && input.Shoot && timeSinceLastShot >= settings.attackSpeed) Shoot(input.ShootDirection);
             return state;
         }
 
@@ -81,7 +85,7 @@ namespace Logic
 
             var projectileRotation = state.rotation * shootDirection;
             var projectile = new WeaponProjectile(
-                state.position,
+                state.position + state.rotation * settings.fireOffset,
                 projectileRotation,
                 state.velocity + projectileRotation * Vector3.forward * settings.projectileSpeed
             );
