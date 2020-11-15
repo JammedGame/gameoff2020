@@ -34,7 +34,7 @@ namespace View
         {
             if (!planetViews.TryGetValue(planet, out PlanetView view))
             {
-                view = GameObject.Instantiate(Resources.Load<PlanetView>("Prefabs/PlanetView"));
+                view = GameObject.Instantiate(planet.Settings.ViewPrefab);
                 view.Planet = planet;
                 planetViews.Add(planet, view);
             }
