@@ -16,6 +16,8 @@ public class GameController : MonoBehaviour
     public readonly List<Planet> Planets = new List<Planet>();
     public readonly List<Fighter> Fighters = new List<Fighter>();
     public readonly List<WeaponProjectile> Projectiles = new List<WeaponProjectile>();
+    public readonly List<Mothership> Motherships = new List<Mothership>();
+    public readonly List<Drone> Drones = new List<Drone>();
 
     private Fighter player;
     private float timeSinceLastSendClientState = SendClientStateRate;
@@ -34,7 +36,8 @@ public class GameController : MonoBehaviour
         }
 
         Instance = this;
-        foreach (var planetSettings in LevelId.LevelOne.GetSettings().planetSettings)
+        var levelSettings = LevelId.LevelOne.GetSettings();
+        foreach (var planetSettings in levelSettings.planetSettings)
         {
             var planet = new Planet(planetSettings);
             Planets.Add(planet);
@@ -48,6 +51,12 @@ public class GameController : MonoBehaviour
             velocity = new Vector3(),
         });
         Fighters.Add(player);
+
+        foreach (var mothershipSettings in levelSettings.mothershipSettings)
+        {
+            var mothership = new Mothership(mothershipSettings);
+            Motherships.Add(mothership);
+        }
 
         Cursor.SetCursor(Resources.Load<Texture2D>("Textures/Crosshair"), new Vector2(16f, 16f), CursorMode.Auto);
 
@@ -108,6 +117,16 @@ public class GameController : MonoBehaviour
             fighter.Tick(dT);
         }
 
+        foreach (var mothership in Motherships)
+        {
+            mothership.Tick(dT);
+        }
+
+        foreach (var drone in Drones)
+        {
+            drone.Tick(dT);
+        }
+
         SendClientStateIfNecessary(dT);
         ViewController.UpdateViews(this);
     }
@@ -149,5 +168,26 @@ public class GameController : MonoBehaviour
     public void AddProjectile(WeaponProjectile projectile)
     {
         Projectiles.Add(projectile);
+    }
+
+    public void AddDrone(Drone drone)
+    {
+        Drones.Add(drone);
+    }
+
+    public Fighter GetNearestTarget(Vector3 position, Allegiance allegiance)
+    {
+        var minDistance = float.MaxValue;
+        Fighter result = null;
+        foreach (var target in Fighters)
+        {
+            var targetDistance = Vector3.Distance(position, target.Position);
+            if (targetDistance < minDistance)
+            {
+                minDistance = targetDistance;
+                result = target;
+            }
+        }
+        return result;
     }
 }

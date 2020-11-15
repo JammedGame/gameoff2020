@@ -29,8 +29,20 @@ MonoBehaviour:
       atmosphereColor: {r: 0, g: 0.6666667, b: 1, a: 0}
       outerAtmosphereDensity: 0.5
       innerAtmosphereDensity: 1
+    mothershipSettings:
+    - type: 1
+      allegiance: 2
+      position: {x: 600, y: 0, z: 600}
+      rotationalVelocity: {x: 0, y: 0, z: 10}
+      droneSpawnPointSettings:
+      - droneType: 3
+        relativePosition: {x: 0, y: 0, z: -150}
+        initialSpawnTime: 10
+        periodicSpawn: 1
+        spawnPeriod: 10
   FighterSettings:
   - type: 1
+    maxHealth: 100
     defaultSpeed: 15
     boostSpeed: 100
     brakeSpeed: 1.5
@@ -68,8 +80,17 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     rollSpeed: 120
+    attackDamage: 10
     attackSpeed: 0.1
     projectileSpeed: 20
     turrets:
     - {x: -0.16, y: 0, z: 0.02}
     - {x: 0.16, y: 0, z: 0.02}
+  DroneSettings:
+  - type: 3
+    maxHealth: 100
+    maxSpeed: 20
+    attackDamage: 10
+    attackSpeed: 0.5
+    attackRange: 50
+    projectileSpeed: 20

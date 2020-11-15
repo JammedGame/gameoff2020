@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Logic;
+using Settings;
 using UnityEngine;
 
 namespace View
@@ -11,6 +12,8 @@ namespace View
         private readonly Dictionary<Planet, PlanetView> planetViews = new Dictionary<Planet, PlanetView>();
         private readonly Dictionary<Fighter, FighterView> fighterViews = new Dictionary<Fighter, FighterView>();
         private readonly Dictionary<WeaponProjectile, WeaponProjectileView> projectileViews = new Dictionary<WeaponProjectile, WeaponProjectileView>();
+        private readonly Dictionary<Mothership, MothershipView> mothershipViews = new Dictionary<Mothership, MothershipView>();
+        private readonly Dictionary<Drone, DroneView> droneViews = new Dictionary<Drone, DroneView>();
 
         public void UpdateViews(GameController controller)
         {
@@ -27,6 +30,16 @@ namespace View
             foreach (var projectile in controller.Projectiles)
             {
                 UpdateProjectileView(projectile);
+            }
+
+            foreach (var mothership in controller.Motherships)
+            {
+                UpdateMothershipView(mothership);
+            }
+
+            foreach (var drone in controller.Drones)
+            {
+                UpdateDroneView(drone);
             }
         }
 
@@ -59,6 +72,26 @@ namespace View
                 view = GameObject.Instantiate(Resources.Load<WeaponProjectileView>("Prefabs/WeaponProjectileView"));
                 view.WeaponProjectile = projectile;
                 projectileViews.Add(projectile, view);
+            }
+        }
+
+        private void UpdateMothershipView(Mothership mothership)
+        {
+            if (!mothershipViews.TryGetValue(mothership, out MothershipView view))
+            {
+                view = mothership.Type.LoadView();
+                view.Mothership = mothership;
+                mothershipViews.Add(mothership, view);
+            }
+        }
+
+        private void UpdateDroneView(Drone drone)
+        {
+            if (!droneViews.TryGetValue(drone, out DroneView view))
+            {
+                view = drone.Type.LoadView();
+                view.Drone = drone;
+                droneViews.Add(drone, view);
             }
         }
     }

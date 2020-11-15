@@ -154,6 +154,7 @@ namespace Communication
 	public class PlayerState
 	{
 		public string id;
+		public float currentHealth;
 		public Vector3 position;
 		public Quaternion rotation;
 		public Vector3 velocity;
@@ -162,6 +163,7 @@ namespace Communication
 		public void CopyFrom(PlayerState newState)
 		{
 			id = newState.id;
+			currentHealth = newState.currentHealth;
 			position = newState.position;
 			rotation = newState.rotation;
 			velocity = newState.velocity;
