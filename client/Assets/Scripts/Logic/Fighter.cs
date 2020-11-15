@@ -24,6 +24,7 @@ namespace Logic
         public PlayerState State => state;
         public string PlayerId => state.id;
         public float CurrentHealth => state.currentHealth;
+        public bool IsDead => CurrentHealth <= 0;
         public bool IsPlayer => PlayerId == GameController.Instance.PlayerState.id;
         public Vector3 Position => state.position;
         public Quaternion Rotation => state.rotation;

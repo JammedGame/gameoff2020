@@ -22,22 +22,14 @@ namespace Logic
         public void Tick(float dT)
         {
             timeSinceLastShot += dT;
-            if (target == null) FindTarget();
+            if (target == null || target.IsDead) FindTarget();
             if (target == null) return;
 
             var targetVector = target.Position - Position;
             Rotation = Quaternion.LookRotation(targetVector.normalized);
 
-            if (targetVector.magnitude > Settings.attackRange)
-            {
-                var desiredVelocity = Rotation * Vector3.forward * Settings.maxSpeed;
-                Velocity = desiredVelocity;
-            }
-            else
-            {
-                Velocity = Vector3.zero;
-                if (timeSinceLastShot >= Settings.attackSpeed) Shoot();
-            }
+            if (targetVector.magnitude > Settings.attackRange) MoveTowardsTarget();
+            else ShootIfAble();
 
             Position += Velocity * dT;
         }
@@ -47,8 +39,17 @@ namespace Logic
             target = GameController.Instance.GetNearestTarget(Position, Allegiance.GetOpponent());
         }
 
-        private void Shoot()
+        private void MoveTowardsTarget()
         {
+            var desiredVelocity = Rotation * Vector3.forward * Settings.maxSpeed;
+            Velocity = desiredVelocity;
+        }
+
+        private void ShootIfAble()
+        {
+            Velocity = Vector3.zero;
+            if (timeSinceLastShot < Settings.attackSpeed) return;
+
             timeSinceLastShot = 0;
             var projectile = new WeaponProjectile(
                 this,
