@@ -11,11 +11,12 @@ public class GameController : MonoBehaviour
 
     public static GameController Instance { get; private set; }
 
-    public CameraController cameraController;
+    public GameViewController ViewController;
 
-    public List<Planet> Planets { get; } = new List<Planet>();
-    private readonly List<Fighter> fighters = new List<Fighter>();
-    private readonly List<WeaponProjectile> projectiles = new List<WeaponProjectile>();
+    public readonly List<Planet> Planets = new List<Planet>();
+    public readonly List<Fighter> Fighters = new List<Fighter>();
+    public readonly List<WeaponProjectile> Projectiles = new List<WeaponProjectile>();
+
     private Fighter player;
     private float timeSinceLastSendClientState = SendClientStateRate;
 
@@ -37,9 +38,6 @@ public class GameController : MonoBehaviour
         {
             var planet = new Planet(planetSettings);
             Planets.Add(planet);
-
-            var planetView = GameObject.Instantiate(planetSettings.ViewPrefab);
-            planetView.Planet = planet;
         }
 
         player = new Fighter(FighterType.Mosquito.GetSettings(), new PlayerState
@@ -49,11 +47,7 @@ public class GameController : MonoBehaviour
             rotation = Quaternion.Euler(-10, 35f, -65f),
             velocity = new Vector3(),
         });
-        fighters.Add(player);
-
-        var playerView = Instantiate(Resources.Load<FighterView>("Prefabs/FighterView"));
-        playerView.Fighter = player;
-        cameraController.target = playerView.transform;
+        Fighters.Add(player);
 
         Cursor.SetCursor(Resources.Load<Texture2D>("Textures/Crosshair"), new Vector2(16f, 16f), CursorMode.Auto);
 
@@ -98,23 +92,24 @@ public class GameController : MonoBehaviour
         };
         player.SetPlayerInput(currentInput);
 
-		for (int i = 0; i < projectiles.Count; i++)
+		for (int i = 0; i < Projectiles.Count; i++)
         {
-			var projectile = projectiles[i];
+			var projectile = Projectiles[i];
 			projectile.Tick(dT);
             if (projectile.Time > 10)
             {
-                projectiles.RemoveAt(i--);
+                Projectiles.RemoveAt(i--);
                 continue;
             }
         }
 
-        foreach (var fighter in fighters)
+        foreach (var fighter in Fighters)
         {
             fighter.Tick(dT);
         }
 
         SendClientStateIfNecessary(dT);
+        ViewController.UpdateViews(this);
     }
 
     private void SendClientStateIfNecessary(float dT)
@@ -153,9 +148,6 @@ public class GameController : MonoBehaviour
 
     public void AddProjectile(WeaponProjectile projectile)
     {
-        projectiles.Add(projectile);
-
-        var projectileView = Instantiate(Resources.Load<WeaponProjectileView>("Prefabs/WeaponProjectileView"));
-        projectileView.WeaponProjectile = projectile;
+        Projectiles.Add(projectile);
     }
 }
