@@ -70,4 +70,6 @@ MonoBehaviour:
     rollSpeed: 120
     attackSpeed: 0.1
     projectileSpeed: 20
-    fireOffset: {x: 0, y: -0.01, z: 0.02}
+    turrets:
+    - {x: -0.16, y: 0, z: 0.02}
+    - {x: 0.16, y: 0, z: 0.02}

@@ -85,12 +85,16 @@ namespace Logic
             timeSinceLastShot = 0;
 
             var projectileRotation = state.rotation * shootDirection;
-            var projectile = new WeaponProjectile(
-                state.position + state.rotation * settings.fireOffset,
-                projectileRotation,
-                state.velocity + projectileRotation * Vector3.forward * settings.projectileSpeed
-            );
-            GameController.Instance.AddProjectile(projectile);
+
+            foreach(var turret in settings.turrets)
+            {
+                var projectile = new WeaponProjectile(
+                    state.position + state.rotation * turret,
+                    projectileRotation,
+                    state.velocity + projectileRotation * Vector3.forward * settings.projectileSpeed
+                );
+                GameController.Instance.AddProjectile(projectile);
+            }
         }
     }
 }

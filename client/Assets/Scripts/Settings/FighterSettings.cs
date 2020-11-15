@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Settings
@@ -20,6 +21,6 @@ namespace Settings
         public float rollSpeed;
         public float attackSpeed;
         public float projectileSpeed;
-        public Vector3 fireOffset;
+        public List<Vector3> turrets;
     }
 }
