@@ -38,7 +38,7 @@ public class GameController : MonoBehaviour
             var planet = new Planet(planetSettings);
             Planets.Add(planet);
 
-            var planetView = GameObject.Instantiate(Resources.Load<PlanetView>("Prefabs/PlanetView"));
+            var planetView = GameObject.Instantiate(planetSettings.ViewPrefab);
             planetView.Planet = planet;
         }
 

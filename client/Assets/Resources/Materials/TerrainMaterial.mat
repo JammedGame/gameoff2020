@@ -95,7 +95,7 @@ Material:
     - _LightMultiply: 1
     - _LightPower: 1
     - _LightSubtract: 0
-    - _Metallic: 0
+    - _Metallic: 0.2
     - _Mode: 0
     - _NormalTile: 1
     - _OcclusionStrength: 1

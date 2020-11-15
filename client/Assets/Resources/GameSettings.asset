@@ -21,7 +21,7 @@ MonoBehaviour:
       scale: {x: 1000, y: 1000, z: 1000}
       mass: 1e+9
       rotationalVelocity: {x: 0, y: 0, z: 0}
-      surfacePrefab: {fileID: 8980457464325596058, guid: e3a6709240836d740926d34d69ac7410,
+      ViewPrefab: {fileID: 4322607139522115905, guid: e3a0788e277963848abf47aa8c1655c2,
         type: 3}
       terrainColor: {r: 0.83137256, g: 0.26596582, b: 0.1607843, a: 0}
       oceanColor: {r: 0.5087399, g: 0.172549, b: 0.8117647, a: 0}

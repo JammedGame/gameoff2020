@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using View;
 
 namespace Settings
 {
@@ -27,7 +28,7 @@ namespace Settings
         public Vector3 scale;
         public float mass;
         public Vector3 rotationalVelocity;
-        public GameObject surfacePrefab;
+        public PlanetView ViewPrefab;
         public Color terrainColor;
         public Color oceanColor;
         public float atmosphereScale;

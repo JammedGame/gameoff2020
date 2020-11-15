@@ -7,7 +7,7 @@ namespace View
     {
         public MeshRenderer atmosphere;
 
-        private MeshRenderer surface;
+        public MeshRenderer surface;
 
         public Planet Planet { get; set; }
 
@@ -19,8 +19,6 @@ namespace View
             t.localScale = Planet.Settings.scale;
 
             var atmosphereHeight = Planet.AtmosphereHeight;
-            var surfaceObject = Instantiate(Planet.Settings.surfacePrefab, t);
-            surface = surfaceObject.GetComponent<MeshRenderer>();
             //if (surface.materials.Length > 0)
             //{
             //    var ocean = surface.materials[0];
