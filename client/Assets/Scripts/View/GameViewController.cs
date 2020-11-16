@@ -69,8 +69,7 @@ namespace View
         {
             if (!projectileViews.TryGetValue(projectile, out WeaponProjectileView view))
             {
-                view = GameObject.Instantiate(Resources.Load<WeaponProjectileView>("Prefabs/WeaponProjectileView"));
-                view.WeaponProjectile = projectile;
+                view = WeaponProjectileView.Create(projectile);
                 projectileViews.Add(projectile, view);
             }
         }

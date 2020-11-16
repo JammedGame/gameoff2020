@@ -6,13 +6,15 @@ namespace View
     public class WeaponProjectileView : MonoBehaviour
     {
         public float smoothMovement = 0.8f;
+        public WeaponProjectile WeaponProjectile { get; private set; }
 
-        public WeaponProjectile WeaponProjectile { get; set; }
-
-        private void Start()
+        public static WeaponProjectileView Create(WeaponProjectile weaponProjectile)
         {
-            transform.localPosition = WeaponProjectile.Position;
-            transform.localRotation = WeaponProjectile.Rotation;
+            var newView = GameObject.Instantiate(Resources.Load<WeaponProjectileView>("Prefabs/WeaponProjectileView"));
+            newView.WeaponProjectile = weaponProjectile;
+            newView.transform.localPosition = weaponProjectile.Position;
+            newView.transform.localRotation = weaponProjectile.Rotation;
+            return newView;
         }
 
         private void Update()
