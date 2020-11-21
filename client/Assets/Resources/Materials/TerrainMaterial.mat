@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: TerrainMaterial
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: 2f6feb0ff1b4530449b6c3efed710d2b, type: 3}
   m_ShaderKeywords: _GLOSSYREFLECTIONS_OFF _SPECULARHIGHLIGHTS_OFF
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -74,8 +74,9 @@ Material:
     m_Floats:
     - _AlphaClip: 0
     - _ApproachDistance: 100
+    - _ApproachEffectOnEmission: 0.1
     - _AtmosphereAlpha: 1
-    - _AtmosphereHeight: 200
+    - _AtmosphereHeight: 100
     - _BackAlpha: 0.5
     - _Blend: 0
     - _BumpScale: 1
@@ -114,9 +115,10 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _AtmosphereTint: {r: 0, g: 0.6666667, b: 1, a: 1}
+    - _AtmosphereTint: {r: 0.92156863, g: 0.12941177, b: 0, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0.6037736, g: 0.3092315, b: 0.14524741, a: 1}
+    - _Color: {r: 0.4979589, g: 0.14117646, b: 0.6901961, a: 1}
+    - _Emission: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _ShimmerVelocity: {r: 0.01, g: 0.003, b: 0, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
