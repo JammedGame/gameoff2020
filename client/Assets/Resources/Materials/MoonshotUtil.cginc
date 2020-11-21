@@ -5,10 +5,10 @@ float remap (float input, float2 inMinMax, float2 outMinMax)
 
 float fresnelEffect (float3 normal, float3 viewDir, float power)
 {
-    return pow((1 - saturate(dot(normalize(normal), normalize(viewDir)))), power);
+    return pow((1.0 - saturate(dot(normalize(normal), normalize(viewDir)))), power);
 }
 
 float atmosphereParameters (float alpha, float power, float multiply, float sub)
 {
-    return (pow(alpha, power) - 1) * multiply + 1 - sub;
+    return (pow(alpha, power) - 1.0) * multiply + 1.0 - sub;
 }
