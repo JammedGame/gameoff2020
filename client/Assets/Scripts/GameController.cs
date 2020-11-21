@@ -58,7 +58,7 @@ public class GameController : MonoBehaviour
             Motherships.Add(mothership);
         }
 
-        Cursor.SetCursor(Resources.Load<Texture2D>("Textures/Crosshair"), new Vector2(16f, 16f), CursorMode.Auto);
+        Cursor.SetCursor(Resources.Load<Texture2D>("Textures/CrosshairMove"), new Vector2(16f, 16f), CursorMode.Auto);
 
         MoonshotServer.Instance.OnAuthoritativeStateRecieved += LoadAuthoritativeState;
     }

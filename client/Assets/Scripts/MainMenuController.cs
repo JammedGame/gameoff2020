@@ -28,7 +28,7 @@ public class MainMenuController : MonoBehaviour
             exitButton.SetActive(false);
         #endif
 
-        Cursor.SetCursor(Resources.Load<Texture2D>("Textures/Crosshair"), new Vector2(16f, 16f), CursorMode.Auto);
+        Cursor.SetCursor(Resources.Load<Texture2D>("Textures/CrosshairMove"), new Vector2(16f, 16f), CursorMode.Auto);
     }
 
     public void ClickStartGame()
