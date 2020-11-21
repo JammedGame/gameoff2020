@@ -3,9 +3,9 @@ float remap (float input, float2 inMinMax, float2 outMinMax)
     return outMinMax.x + (input - inMinMax.x) * (outMinMax.y - outMinMax.x) / (inMinMax.y - inMinMax.x);
 }
 
-float fresnelEffect (float3 normal, float3 viewDir, float power)
+float fresnelEffect (float3 normal, float3 viewDir, float featherStrength, float featherSize)
 {
-    return pow((1.0 - saturate(dot(normalize(normal), normalize(viewDir)))), power);
+    return pow((1.0 - pow(saturate(dot(normalize(normal), normalize(viewDir))), featherSize)), featherStrength);
 }
 
 float3 blendOverlay (float3 Base, float3 Blend, float Opacity)

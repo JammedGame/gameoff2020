@@ -93,7 +93,10 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 10
-    - _EdgeFeather: 1
+    - _EdgeFeather: 0.1
+    - _EdgeFeatherRadius: 3
+    - _EdgeFeatherSize: 3
+    - _EdgeFeatherStrength: 0.1
     - _EnvironmentReflections: 1
     - _FogDensity: 0.005
     - _FresnelPower: 2

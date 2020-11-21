@@ -8,7 +8,8 @@
         _LightPower ("LightPower", Range(0,1)) = 0.5
         _LightMultiply ("LightMultiply", Range(0,1)) = 0.5
         _LightSubtract ("LightSubtract", Range(0,1)) = 0.0
-        _EdgeFeather ("EdgeFeather", Float) = 1.0
+        _EdgeFeatherStrength ("EdgeFeatherStrength", Float) = 0.5
+        _EdgeFeatherSize ("EdgeFeatherSize", Float) = 1.0
         _ApproachDistance ("ApproachDistance", Float) = 100.0
     }
     SubShader
@@ -51,7 +52,8 @@
             float _LightPower;
             float _LightMultiply;
             float _LightSubtract;
-            float _EdgeFeather;
+            float _EdgeFeatherStrength;
+            float _EdgeFeatherSize;
             float _ApproachDistance;
 
             v2f vert (appdata v)
@@ -68,8 +70,8 @@
             float4 frag (v2f i, bool isFrontFace:SV_IsFrontFace) : SV_Target
             {
                 float3 featherNormal = isFrontFace ? i.worldNormal : -i.worldNormal;
-                float featherPower = 1.0 / _EdgeFeather;
-                float featherFresnel = fresnelEffect(featherNormal, i.viewDir, featherPower);
+                float featherStrength = 1.0 / _EdgeFeatherStrength;
+                float featherFresnel = fresnelEffect(featherNormal, i.viewDir, featherStrength, _EdgeFeatherSize);
                 float featherAlpha = isFrontFace ? _FrontAlpha : _BackAlpha;
                 float edgeFeather = saturate(min(1.0 - featherFresnel, featherAlpha));
 
