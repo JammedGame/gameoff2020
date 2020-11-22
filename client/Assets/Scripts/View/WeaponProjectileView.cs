@@ -22,5 +22,19 @@ namespace View
             transform.localPosition = Vector3.Lerp(transform.localPosition, WeaponProjectile.Position, 1 - smoothMovement);
             transform.localRotation = WeaponProjectile.Rotation;
         }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Planet")) 
+            {
+                var planet = other.GetComponentInParent<PlanetView>()?.Planet;
+                WeaponProjectile.GetKilled(planet);
+            }
+            else if (other.CompareTag("Mothership"))
+            {
+                var mothership = other.GetComponentInParent<MothershipView>()?.Mothership;
+                WeaponProjectile.GetKilled(mothership);
+            }
+        }
     }
 }

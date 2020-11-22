@@ -20,7 +20,6 @@ namespace Logic
             Position = settings.position;
             Team = settings.team;
             CurrentHealth = settings.maxHealth;
-            CollisionScale = settings.collisionScale;
             Invulnerable = settings.invulnerable;
             droneSpawnPoints.AddRange(settings.droneSpawnPointSettings.Select(s => new DroneSpawnPoint(s, Team, settings.position)));
         }

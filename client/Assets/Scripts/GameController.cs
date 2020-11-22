@@ -105,7 +105,7 @@ public class GameController : MonoBehaviour
         {
 			var projectile = Projectiles[i];
 			projectile.Tick(dT);
-            if (projectile.Time > 10)
+            if (projectile.Time > 10 || projectile.Dead)
             {
                 Projectiles.RemoveAt(i--);
                 continue;
@@ -125,11 +125,6 @@ public class GameController : MonoBehaviour
         foreach (var mothership in Motherships)
         {
             mothership.Tick(dT);
-            for (var i = 0; i < Projectiles.Count; i++)
-            {
-                var projectile = Projectiles[i];
-                if (mothership.TryCollideWith(projectile)) Projectiles.RemoveAt(i--);
-            }
         }
 
         foreach (var drone in Drones)

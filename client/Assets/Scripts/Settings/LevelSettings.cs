@@ -52,7 +52,6 @@ namespace Settings
         public Vector3 position;
         public Vector3 rotationalVelocity;
         public List<DroneSpawnPointSettings> droneSpawnPointSettings;
-        public float collisionScale;
         public bool invulnerable;
         public float maxHealth;
     }

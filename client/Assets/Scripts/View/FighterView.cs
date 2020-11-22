@@ -27,6 +27,11 @@ namespace View
                 var planet = other.GetComponentInParent<PlanetView>()?.Planet;
                 Fighter.GetKilled(planet);
             }
+            else if (other.CompareTag("Mothership"))
+            {
+                var mothership = other.GetComponentInParent<MothershipView>()?.Mothership;
+                Fighter.GetKilled(mothership);
+            }
         }
     }
 }
