@@ -14,7 +14,7 @@ namespace Logic
         public bool Drift;
     }
 
-    public class Fighter
+    public class Fighter : BattleObject
     {
         private FighterSettings settings;
         private PlayerState state;
@@ -23,12 +23,18 @@ namespace Logic
 
         public PlayerState State => state;
         public string PlayerId => state.id;
-        public float CurrentHealth => state.currentHealth;
+        public override Team Team => state.team;
+        public override float CurrentHealth
+        {
+            get => state.currentHealth;
+            protected set => state.currentHealth = value;
+        }
         public bool IsDead => CurrentHealth <= 0;
         public bool IsPlayer => PlayerId == GameController.Instance.PlayerState.id;
-        public Vector3 Position => state.position;
+        public override Vector3 Position => state.position;
         public Quaternion Rotation => state.rotation;
         public Vector3 Velocity => state.velocity;
+        public override float CollisionScale => settings.collisionScale;
         public Planet IsInAtmosphereOfPlanet => GameController.Instance.IsInAtmosphereOfPlanet(Position);
 
         public Fighter(FighterSettings settings, PlayerState state)

@@ -24,5 +24,6 @@ namespace Settings
         public float attackSpeed;
         public float projectileSpeed;
         public List<Vector3> turrets;
+        public float collisionScale;
     }
 }

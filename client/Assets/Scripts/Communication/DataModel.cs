@@ -26,6 +26,14 @@ namespace Communication
     }
 
 	[Serializable]
+    public enum Team
+    {
+        Neutral = 0,
+        TeamOne = 1,
+        TeamTwo = 2,
+    }
+
+	[Serializable]
 	public class ListGamesRequest {}
 
 	[Serializable]
@@ -154,6 +162,7 @@ namespace Communication
 	public class PlayerState
 	{
 		public string id;
+		public Team team;
 		public float currentHealth;
 		public Vector3 position;
 		public Quaternion rotation;
@@ -163,6 +172,7 @@ namespace Communication
 		public void CopyFrom(PlayerState newState)
 		{
 			id = newState.id;
+			team = newState.team;
 			currentHealth = newState.currentHealth;
 			position = newState.position;
 			rotation = newState.rotation;

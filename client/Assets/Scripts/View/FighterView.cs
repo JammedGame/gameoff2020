@@ -19,5 +19,10 @@ namespace View
             transform.localPosition = Vector3.Lerp(transform.localPosition, Fighter.Position, 1 - smoothMovement);
             transform.localRotation = Fighter.Rotation;
         }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Planet")) Fighter.TakeDamage(float.MaxValue, null);
+        }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Communication;
 using UnityEngine;
 using View;
 
@@ -47,10 +48,11 @@ namespace Settings
     public class MothershipSettings
     {
         public MothershipType type;
-        public Allegiance allegiance;
+        public Team team;
         public Vector3 position;
         public Vector3 rotationalVelocity;
         public List<DroneSpawnPointSettings> droneSpawnPointSettings;
+        public float collisionScale;
     }
 
     [Serializable]

@@ -1,23 +1,25 @@
+using Communication;
 using Settings;
 using UnityEngine;
 
 namespace Logic
 {
-    public class Drone
+    public class Drone : BattleObject
     {
         private Fighter target;
         private float timeSinceLastShot;
 
         public DroneSettings Settings { get; private set; }
         public DroneType Type => Settings.type;
-        public Allegiance Allegiance { get; private set; }
-        public float CurrentHealth { get; private set; }
-        public Vector3 Position { get; private set; }
+        public override Team Team { get; protected set; }
+        public override float CurrentHealth { get; protected set; }
+        public override Vector3 Position { get; protected set; }
         public Quaternion Rotation { get; private set; }
         public Vector3 Velocity { get; private set; }
+        public override float CollisionScale => Settings.collisionScale;
 
-        public Drone(DroneSettings settings, Allegiance allegiance, Vector3 initialPosition)
-            => (Settings, Allegiance, CurrentHealth, Position) = (settings, allegiance, settings.maxHealth, initialPosition);
+        public Drone(DroneSettings settings, Team allegiance, Vector3 initialPosition)
+            => (Settings, Team, CurrentHealth, Position) = (settings, allegiance, settings.maxHealth, initialPosition);
 
         public void Tick(float dT)
         {
@@ -36,7 +38,7 @@ namespace Logic
 
         private void FindTarget()
         {
-            target = GameController.Instance.GetNearestTarget(Position, Allegiance.GetOpponent());
+            target = GameController.Instance.GetNearestTarget(Position, Team.GetOpponent());
         }
 
         private void MoveTowardsTarget()

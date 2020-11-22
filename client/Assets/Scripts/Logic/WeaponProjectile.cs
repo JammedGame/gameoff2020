@@ -1,19 +1,24 @@
 using Communication;
+using Settings;
 using UnityEngine;
 
 namespace Logic
 {
     public class WeaponProjectile
     {
-        private object owner;
-        private float damage;
+        private WeaponProjectileSettings settings;
+        private BattleObject owner;
         private ProjectileState state;
+        public float Damage { get; private set; }
+        public Team Team => owner.Team;
         public Vector3 Position => state.position;
         public Quaternion Rotation => state.rotation;
+        public float CollisionScale => settings.collisionScale;
+        public BattleObject Owner => owner;
         public float Time => state.time;
 
-        public WeaponProjectile(object owner, float damage, Vector3 position, Quaternion rotation, Vector3 velocity) =>
-            (this.owner, this.damage, state) = (owner, damage, new ProjectileState
+        public WeaponProjectile(BattleObject owner, float damage, Vector3 position, Quaternion rotation, Vector3 velocity) =>
+            (this.owner, this.Damage, settings, state) = (owner, damage, GameSettings.Instance.WeaponProjectileSettings, new ProjectileState
             {
                 position = position,
                 rotation = rotation,

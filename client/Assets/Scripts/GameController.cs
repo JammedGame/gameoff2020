@@ -101,7 +101,7 @@ public class GameController : MonoBehaviour
         };
         player.SetPlayerInput(currentInput);
 
-		for (int i = 0; i < Projectiles.Count; i++)
+		for (var i = 0; i < Projectiles.Count; i++)
         {
 			var projectile = Projectiles[i];
 			projectile.Tick(dT);
@@ -115,16 +115,31 @@ public class GameController : MonoBehaviour
         foreach (var fighter in Fighters)
         {
             fighter.Tick(dT);
+            for (var i = 0; i < Projectiles.Count; i++)
+            {
+                var projectile = Projectiles[i];
+                if (fighter.TryCollideWith(projectile)) Projectiles.RemoveAt(i--);
+            }
         }
 
         foreach (var mothership in Motherships)
         {
             mothership.Tick(dT);
+            for (var i = 0; i < Projectiles.Count; i++)
+            {
+                var projectile = Projectiles[i];
+                if (mothership.TryCollideWith(projectile)) Projectiles.RemoveAt(i--);
+            }
         }
 
         foreach (var drone in Drones)
         {
             drone.Tick(dT);
+            for (var i = 0; i < Projectiles.Count; i++)
+            {
+                var projectile = Projectiles[i];
+                if (drone.TryCollideWith(projectile)) Projectiles.RemoveAt(i--);
+            }
         }
 
         SendClientStateIfNecessary(dT);
@@ -175,10 +190,10 @@ public class GameController : MonoBehaviour
         Drones.Add(drone);
     }
 
-    public Fighter GetNearestTarget(Vector3 position, Allegiance allegiance)
+    public Fighter GetNearestTarget(Vector3 position, Team allegiance)
     {
         var minDistance = float.MaxValue;
-        Fighter result = null;
+        var result = default(Fighter);
         foreach (var target in Fighters)
         {
             var targetDistance = Vector3.Distance(position, target.Position);

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Communication;
 using UnityEngine;
 using View;
 
@@ -16,16 +17,17 @@ namespace Settings
         }
 
         public float GravityCoefficient;
+        public bool FriendlyFireEnabled;
+        public WeaponProjectileSettings WeaponProjectileSettings;
         public List<LevelSettings> LevelSettings;
         public List<FighterSettings> FighterSettings;
         public List<DroneSettings> DroneSettings;
     }
 
-    public enum Allegiance
+    [Serializable]
+    public class WeaponProjectileSettings
     {
-        Undefined = 0,
-        Ally = 1,
-        Enemy = 2,
+        public float collisionScale;
     }
 
     public enum DroneType
@@ -46,17 +48,18 @@ namespace Settings
         public float attackSpeed;
         public float attackRange;
         public float projectileSpeed;
+        public float collisionScale;
     }
 
     public static class SettingsExtensions
     {
-        public static Allegiance GetOpponent(this Allegiance allegiance)
+        public static Team GetOpponent(this Team allegiance)
         {
             switch (allegiance)
             {
-                case Allegiance.Ally: return Allegiance.Enemy;
-                case Allegiance.Enemy: return Allegiance.Ally;
-                default: return Allegiance.Undefined;
+                case Team.TeamOne: return Team.TeamTwo;
+                case Team.TeamTwo: return Team.TeamOne;
+                default: return Team.Neutral;
             }
         }
 

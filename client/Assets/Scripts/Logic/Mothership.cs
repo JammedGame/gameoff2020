@@ -1,24 +1,26 @@
 using System.Collections.Generic;
 using System.Linq;
+using Communication;
 using Settings;
 using UnityEngine;
 
 namespace Logic
 {
-    public class Mothership
+    public class Mothership : BattleObject
     {
         private readonly List<DroneSpawnPoint> droneSpawnPoints = new List<DroneSpawnPoint>();
 
         public MothershipSettings Settings { get; private set; }
         public MothershipType Type => Settings.type;
-        public Allegiance Allegiance => Settings.allegiance;
-        public Vector3 Position => Settings.position;
+        public override Team Team => Settings.team;
+        public override Vector3 Position => Settings.position;
         public Quaternion Rotation { get; private set; }
+        public override float CollisionScale => Settings.collisionScale;
 
         public Mothership(MothershipSettings settings)
         {
             Settings = settings;
-            droneSpawnPoints.AddRange(settings.droneSpawnPointSettings.Select(s => new DroneSpawnPoint(s, Allegiance, settings.position)));
+            droneSpawnPoints.AddRange(settings.droneSpawnPointSettings.Select(s => new DroneSpawnPoint(s, Team, settings.position)));
         }
 
         public void Tick(float dT)
@@ -29,6 +31,11 @@ namespace Logic
                 spawnPoint.Tick(dT);
             }
         }
+
+        public override void TakeDamage(float damage, WeaponProjectile source)
+        {
+            Debug.Log($"{this.GetType()} took {damage} damage from {source.Owner.GetType()}");
+        }
     }
 
     public class DroneSpawnPoint
@@ -37,10 +44,10 @@ namespace Logic
         private bool initialSpawnCompleted;
 
         public DroneSpawnPointSettings Settings { get; private set; }
-        public Allegiance Allegiance { get; private set; }
+        public Team Allegiance { get; private set; }
         public Vector3 SpawnPosition { get; private set; }
 
-        public DroneSpawnPoint(DroneSpawnPointSettings settings, Allegiance allegiance, Vector3 mothershipPosition)
+        public DroneSpawnPoint(DroneSpawnPointSettings settings, Team allegiance, Vector3 mothershipPosition)
             => (Settings, Allegiance, SpawnPosition, timeUntilNextSpawn) = (settings, allegiance, mothershipPosition + settings.relativePosition, settings.initialSpawnTime);
 
         public void Tick(float dT)

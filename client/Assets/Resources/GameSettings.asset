@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: GameSettings
   m_EditorClassIdentifier: 
   GravityCoefficient: 0.0000001
+  FriendlyFireEnabled: 0
+  WeaponProjectileSettings:
+    collisionScale: 0.1
   LevelSettings:
   - id: 1
     planetSettings:
@@ -31,7 +34,7 @@ MonoBehaviour:
       innerAtmosphereDensity: 1
     mothershipSettings:
     - type: 1
-      allegiance: 2
+      team: 2
       position: {x: 600, y: 0, z: 600}
       rotationalVelocity: {x: 0, y: 0, z: 10}
       droneSpawnPointSettings:
@@ -40,6 +43,7 @@ MonoBehaviour:
         initialSpawnTime: 10
         periodicSpawn: 1
         spawnPeriod: 10
+      collisionScale: 100
   FighterSettings:
   - type: 1
     maxHealth: 100
@@ -75,8 +79,9 @@ MonoBehaviour:
     attackSpeed: 0.1
     projectileSpeed: 20
     turrets:
-    - {x: -0.16, y: 0, z: 0.02}
-    - {x: 0.16, y: 0, z: 0.02}
+    - {x: -0.16, y: 0, z: 0.22}
+    - {x: 0.16, y: 0, z: 0.22}
+    collisionScale: 0.1
   DroneSettings:
   - type: 3
     maxHealth: 100
@@ -85,3 +90,4 @@ MonoBehaviour:
     attackSpeed: 0.5
     attackRange: 50
     projectileSpeed: 20
+    collisionScale: 0.25
