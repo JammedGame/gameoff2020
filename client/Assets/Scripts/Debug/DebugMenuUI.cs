@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 public class DebugMenuUI : MonoBehaviour
 {
+	private static DebugMenuUI instance;
+
 	public Button ListGames;
 	public Button FindLastGame;
 	public Button StartLastStartableGame;
@@ -13,6 +15,13 @@ public class DebugMenuUI : MonoBehaviour
 
 	private void Awake()
 	{
+		if (instance != null)
+		{
+			Destroy(gameObject);
+			return;
+		}
+
+		instance = this;
 		ListGames.onClick.AddListener(DebugMenu.ListGames);
 		FindLastGame.onClick.AddListener(DebugMenu.FindLastGame);
 		StartLastStartableGame.onClick.AddListener(DebugMenu.StartLastStartableGame);

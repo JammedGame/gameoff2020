@@ -36,14 +36,13 @@ MonoBehaviour:
     - type: 1
       team: 2
       position: {x: 600, y: 0, z: 600}
-      rotationalVelocity: {x: 0, y: 0, z: 10}
+      rotationalVelocity: {x: 0, y: 0, z: 0}
       droneSpawnPointSettings:
       - droneType: 3
         relativePosition: {x: 0, y: 0, z: -150}
         initialSpawnTime: 10
         periodicSpawn: 1
         spawnPeriod: 10
-      collisionScale: 100
       invulnerable: 1
       maxHealth: 100000
   FighterSettings:

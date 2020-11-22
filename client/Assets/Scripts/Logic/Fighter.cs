@@ -33,7 +33,6 @@ namespace Logic
             get => state.currentHealth;
             protected set => state.currentHealth = value;
         }
-        public bool IsDead => CurrentHealth <= 0;
         public bool IsPlayer => PlayerId == GameController.Instance.PlayerState.id;
         public override Vector3 Position
         {

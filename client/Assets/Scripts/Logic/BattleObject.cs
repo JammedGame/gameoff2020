@@ -11,6 +11,7 @@ namespace Logic
         public virtual float CurrentHealth { get; protected set; }
         public float CollisionScale { get; protected set; }
         public bool Invulnerable { get; protected set; }
+        public bool Dead => !Invulnerable && CurrentHealth <= 0;
 
         public void TakeDamage(float damage, object source)
         {

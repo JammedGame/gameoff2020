@@ -20,7 +20,7 @@ namespace Logic
         public void Tick(float dT)
         {
             timeSinceLastShot += dT;
-            if (target == null || target.IsDead) FindTarget();
+            if (target == null || target.Dead) FindTarget();
             if (target == null) return;
 
             var targetVector = target.Position - Position;

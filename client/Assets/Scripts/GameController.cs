@@ -101,10 +101,10 @@ public class GameController : MonoBehaviour
         };
         player.SetPlayerInput(currentInput);
 
-		for (var i = 0; i < Projectiles.Count; i++)
+        for (var i = 0; i < Projectiles.Count; i++)
         {
-			var projectile = Projectiles[i];
-			projectile.Tick(dT);
+            var projectile = Projectiles[i];
+            projectile.Tick(dT);
             if (projectile.Time > 10 || projectile.Dead)
             {
                 Projectiles.RemoveAt(i--);
@@ -112,14 +112,16 @@ public class GameController : MonoBehaviour
             }
         }
 
-        foreach (var fighter in Fighters)
+        for (var i = 0; i < Fighters.Count; i++)
         {
+            var fighter = Fighters[i];
             fighter.Tick(dT);
-            for (var i = 0; i < Projectiles.Count; i++)
+            for (var j = 0; j < Projectiles.Count; j++)
             {
-                var projectile = Projectiles[i];
-                if (fighter.TryCollideWith(projectile)) Projectiles.RemoveAt(i--);
+                var projectile = Projectiles[j];
+                if (fighter.TryCollideWith(projectile)) Projectiles.RemoveAt(j--);
             }
+            if (fighter.Dead) Fighters.RemoveAt(i--);
         }
 
         foreach (var mothership in Motherships)
@@ -127,14 +129,16 @@ public class GameController : MonoBehaviour
             mothership.Tick(dT);
         }
 
-        foreach (var drone in Drones)
+        for (var i = 0; i < Drones.Count; i++)
         {
+            var drone = Drones[i];
             drone.Tick(dT);
-            for (var i = 0; i < Projectiles.Count; i++)
+            for (var j = 0; j < Projectiles.Count; j++)
             {
-                var projectile = Projectiles[i];
-                if (drone.TryCollideWith(projectile)) Projectiles.RemoveAt(i--);
+                var projectile = Projectiles[j];
+                if (drone.TryCollideWith(projectile)) Projectiles.RemoveAt(j--);
             }
+            if (drone.Dead) Drones.RemoveAt(i--);
         }
 
         SendClientStateIfNecessary(dT);
