@@ -23,7 +23,11 @@ namespace Logic
 
         public PlayerState State => state;
         public string PlayerId => state.id;
-        public override Team Team => state.team;
+        public override Team Team
+        {
+            get => state.team;
+            protected set => state.team = value;
+        }
         public override float CurrentHealth
         {
             get => state.currentHealth;
@@ -31,10 +35,13 @@ namespace Logic
         }
         public bool IsDead => CurrentHealth <= 0;
         public bool IsPlayer => PlayerId == GameController.Instance.PlayerState.id;
-        public override Vector3 Position => state.position;
+        public override Vector3 Position
+        {
+            get => state.position;
+            protected set => state.position = value;
+        }
         public Quaternion Rotation => state.rotation;
         public Vector3 Velocity => state.velocity;
-        public override float CollisionScale => settings.collisionScale;
         public Planet IsInAtmosphereOfPlanet => GameController.Instance.IsInAtmosphereOfPlanet(Position);
 
         public Fighter(FighterSettings settings, PlayerState state)
@@ -42,6 +49,7 @@ namespace Logic
             this.settings = settings;
             this.state = state;
             this.state.currentHealth = settings.maxHealth;
+            CollisionScale = settings.collisionScale;
         }
 
         public void SetPlayerInput(FighterInput input) => currentInput = input;

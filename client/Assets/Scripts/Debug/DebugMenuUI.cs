@@ -3,13 +3,13 @@ using UnityEngine.UI;
 
 public class DebugMenuUI : MonoBehaviour
 {
-	[SerializeField] private Button ListGames;
-	[SerializeField] private Button FindLastGame;
-	[SerializeField] private Button StartLastStartableGame;
-	[SerializeField] private Button JoinLastJoinableGame;
-	[SerializeField] private Button CreateGame;
-	[SerializeField] private Button LoadGameScene;
-	[SerializeField] private GameObject buttonHolder;
+	public Button ListGames;
+	public Button FindLastGame;
+	public Button StartLastStartableGame;
+	public Button JoinLastJoinableGame;
+	public Button CreateGame;
+	public Button LoadGameScene;
+	public GameObject buttonHolder;
 
 	private void Awake()
 	{

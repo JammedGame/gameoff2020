@@ -36,7 +36,7 @@ public class LobbyController : MonoBehaviour
             // Debug.Log($"{nameof(ListGames)} : {jsonResponse}");
             games.AddRange(response.games);
             int i = 0;
-            int x = 50;
+            // int x = 50;
             int y = 50;
             games.ForEach((game) => {
                 var gameItem = Instantiate(Resources.Load<LobbyGameItem>("Prefabs/LobbyGameItem"), gameItemContainer.transform);

@@ -22,7 +22,11 @@ namespace View
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Planet")) Fighter.TakeDamage(float.MaxValue, null);
+            if (other.CompareTag("Planet")) 
+            {
+                var planet = other.GetComponentInParent<PlanetView>()?.Planet;
+                Fighter.GetKilled(planet);
+            }
         }
     }
 }

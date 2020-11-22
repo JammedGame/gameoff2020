@@ -44,6 +44,8 @@ MonoBehaviour:
         periodicSpawn: 1
         spawnPeriod: 10
       collisionScale: 100
+      invulnerable: 1
+      maxHealth: 100000
   FighterSettings:
   - type: 1
     maxHealth: 100

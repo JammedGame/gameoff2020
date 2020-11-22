@@ -6,38 +6,34 @@ namespace Logic
 {
     public class BattleObject
     {
-        public virtual Vector3 Position
+        public virtual Vector3 Position { get; protected set; }
+        public virtual Team Team { get; protected set; }
+        public virtual float CurrentHealth { get; protected set; }
+        public float CollisionScale { get; protected set; }
+        public bool Invulnerable { get; protected set; }
+
+        public void TakeDamage(float damage, object source)
         {
-            get => throw new System.NotImplementedException();
-            protected set => throw new System.NotImplementedException();
-        }
-        public virtual Team Team
-        {
-            get => throw new System.NotImplementedException();
-            protected set => throw new System.NotImplementedException();
-        }
-        public virtual float CurrentHealth
-        {
-            get => throw new System.NotImplementedException();
-            protected set => throw new System.NotImplementedException();
-        }
-        public virtual float CollisionScale
-        {
-            get => throw new System.NotImplementedException();
-            protected set => throw new System.NotImplementedException();
+            if (Invulnerable) return;
+
+            CurrentHealth = Mathf.Max(0, CurrentHealth - damage);
+            Debug.Log($"{this} took {damage} damage from {source}");
         }
 
-        public virtual void TakeDamage(float damage, WeaponProjectile source)
+        public void GetKilled(object source)
         {
-            CurrentHealth -= damage;
-            Debug.Log($"{this.GetType()} took {damage} damage from {source?.Owner.GetType()}");
+            if (Invulnerable) return;
+
+            CurrentHealth = 0;
+            Debug.Log($"{this} was killed by {source}");
         }
 
         public bool TryCollideWith(WeaponProjectile projectile)
         {
             if (!GameSettings.Instance.FriendlyFireEnabled && projectile.Team == Team) return false;
             if (Vector3.Distance(projectile.Position, Position) > projectile.CollisionScale + CollisionScale) return false;
-            TakeDamage(projectile.Damage, projectile);
+
+            TakeDamage(projectile.Damage, projectile.Owner);
             return true;
         }
     }

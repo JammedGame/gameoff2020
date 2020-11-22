@@ -11,15 +11,11 @@ namespace Logic
 
         public DroneSettings Settings { get; private set; }
         public DroneType Type => Settings.type;
-        public override Team Team { get; protected set; }
-        public override float CurrentHealth { get; protected set; }
-        public override Vector3 Position { get; protected set; }
         public Quaternion Rotation { get; private set; }
         public Vector3 Velocity { get; private set; }
-        public override float CollisionScale => Settings.collisionScale;
 
         public Drone(DroneSettings settings, Team allegiance, Vector3 initialPosition)
-            => (Settings, Team, CurrentHealth, Position) = (settings, allegiance, settings.maxHealth, initialPosition);
+            => (Settings, Team, CurrentHealth, Position, CollisionScale) = (settings, allegiance, settings.maxHealth, initialPosition, settings.collisionScale);
 
         public void Tick(float dT)
         {

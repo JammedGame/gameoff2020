@@ -12,14 +12,16 @@ namespace Logic
 
         public MothershipSettings Settings { get; private set; }
         public MothershipType Type => Settings.type;
-        public override Team Team => Settings.team;
-        public override Vector3 Position => Settings.position;
         public Quaternion Rotation { get; private set; }
-        public override float CollisionScale => Settings.collisionScale;
 
         public Mothership(MothershipSettings settings)
         {
             Settings = settings;
+            Position = settings.position;
+            Team = settings.team;
+            CurrentHealth = settings.maxHealth;
+            CollisionScale = settings.collisionScale;
+            Invulnerable = settings.invulnerable;
             droneSpawnPoints.AddRange(settings.droneSpawnPointSettings.Select(s => new DroneSpawnPoint(s, Team, settings.position)));
         }
 
@@ -30,11 +32,6 @@ namespace Logic
             {
                 spawnPoint.Tick(dT);
             }
-        }
-
-        public override void TakeDamage(float damage, WeaponProjectile source)
-        {
-            Debug.Log($"{this.GetType()} took {damage} damage from {source.Owner.GetType()}");
         }
     }
 
