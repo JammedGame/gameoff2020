@@ -14,8 +14,8 @@ namespace Logic
         public Quaternion Rotation { get; private set; }
         public Vector3 Velocity { get; private set; }
 
-        public Drone(DroneSettings settings, Team allegiance, Vector3 initialPosition)
-            => (Settings, Team, CurrentHealth, Position, CollisionScale) = (settings, allegiance, settings.maxHealth, initialPosition, settings.collisionScale);
+        public Drone(DroneSettings settings, Team team, Vector3 initialPosition)
+            => (Settings, Team, CurrentHealth, Position, CollisionScale) = (settings, team, settings.maxHealth, initialPosition, settings.collisionScale);
 
         public void Tick(float dT)
         {

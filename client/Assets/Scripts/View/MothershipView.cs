@@ -1,11 +1,19 @@
 using Logic;
-using UnityEngine;
+using Settings;
 
 namespace View
 {
-    public class MothershipView : MonoBehaviour
+    public class MothershipView : BattleView<MothershipView>
     {
         public Mothership Mothership { get; set; }
+
+        public static MothershipView Create(Mothership mothership)
+        {
+            var newView = FetchFromPool();
+            if (newView == null) newView = mothership.Type.LoadView();
+            newView.Mothership = mothership;
+            return newView;
+        }
 
         private void Update()
         {

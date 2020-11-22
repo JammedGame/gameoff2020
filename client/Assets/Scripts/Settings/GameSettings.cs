@@ -54,9 +54,9 @@ namespace Settings
 
     public static class SettingsExtensions
     {
-        public static Team GetOpponent(this Team allegiance)
+        public static Team GetOpponent(this Team team)
         {
-            switch (allegiance)
+            switch (team)
             {
                 case Team.Blue: return Team.Red;
                 case Team.Red: return Team.Blue;

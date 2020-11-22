@@ -1,6 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
 using Logic;
-using Settings;
 using UnityEngine;
 
 namespace View
@@ -22,9 +22,9 @@ namespace View
                 UpdatePlanetView(planet);
             }
 
-            foreach (var player in controller.Fighters)
+            foreach (var fighter in controller.Fighters)
             {
-                UpdateFighterView(player);
+                UpdateFighterView(fighter);
             }
 
             foreach (var projectile in controller.Projectiles)
@@ -41,14 +41,15 @@ namespace View
             {
                 UpdateDroneView(drone);
             }
+
+            CleanUpDeadViews();
         }
 
         private void UpdatePlanetView(Planet planet)
         {
             if (!planetViews.TryGetValue(planet, out PlanetView view))
             {
-                view = GameObject.Instantiate(planet.Settings.ViewPrefab);
-                view.Planet = planet;
+                view = PlanetView.Create(planet);
                 planetViews.Add(planet, view);
             }
         }
@@ -57,8 +58,7 @@ namespace View
         {
             if (!fighterViews.TryGetValue(fighter, out FighterView view))
             {
-                view = GameObject.Instantiate(Resources.Load<FighterView>("Prefabs/FighterView"));
-                view.Fighter = fighter;
+                view = FighterView.Create(fighter);
                 fighterViews.Add(fighter, view);
 
                 if (fighter.IsPlayer) cameraController.target = view;
@@ -78,8 +78,7 @@ namespace View
         {
             if (!mothershipViews.TryGetValue(mothership, out MothershipView view))
             {
-                view = mothership.Type.LoadView();
-                view.Mothership = mothership;
+                view = MothershipView.Create(mothership);
                 mothershipViews.Add(mothership, view);
             }
         }
@@ -88,9 +87,32 @@ namespace View
         {
             if (!droneViews.TryGetValue(drone, out DroneView view))
             {
-                view = drone.Type.LoadView();
-                view.Drone = drone;
+                view = DroneView.Create(drone);
                 droneViews.Add(drone, view);
+            }
+        }
+
+        private void CleanUpDeadViews()
+        {
+            foreach (var fighter in fighterViews.Where(v => v.Key.Dead).ToList())
+            {
+                var view = fighter.Value;
+                fighterViews.Remove(fighter.Key);
+                view.ReturnToPool();
+            }
+
+            foreach (var projectile in projectileViews.Where(v => v.Key.Dead).ToList())
+            {
+                var view = projectile.Value;
+                projectileViews.Remove(projectile.Key);
+                view.ReturnToPool();
+            }
+
+            foreach (var drone in droneViews.Where(v => v.Key.Dead).ToList())
+            {
+                var view = drone.Value;
+                droneViews.Remove(drone.Key);
+                view.ReturnToPool();
             }
         }
     }

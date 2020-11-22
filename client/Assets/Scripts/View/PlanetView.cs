@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace View
 {
-    public class PlanetView : MonoBehaviour
+    public class PlanetView : BattleView<PlanetView>
     {
         public MeshRenderer atmosphere;
 
@@ -11,7 +11,16 @@ namespace View
 
         public Planet Planet { get; set; }
 
-        private void Start()
+        public static PlanetView Create(Planet planet)
+        {
+            var newView = FetchFromPool();
+            if (newView == null) newView = GameObject.Instantiate(planet.Settings.ViewPrefab);
+            newView.Planet = planet;
+            newView.Init();
+            return newView;
+        }
+
+        private void Init()
         {
             var t = transform;
             t.localPosition = Planet.Settings.position;

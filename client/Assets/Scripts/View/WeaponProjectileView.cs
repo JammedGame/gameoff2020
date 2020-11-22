@@ -3,14 +3,15 @@ using UnityEngine;
 
 namespace View
 {
-    public class WeaponProjectileView : MonoBehaviour
+    public class WeaponProjectileView : BattleView<WeaponProjectileView>
     {
         public float smoothMovement = 0.8f;
         public WeaponProjectile WeaponProjectile { get; private set; }
 
         public static WeaponProjectileView Create(WeaponProjectile weaponProjectile)
         {
-            var newView = GameObject.Instantiate(Resources.Load<WeaponProjectileView>("Prefabs/WeaponProjectileView"));
+            var newView = FetchFromPool();
+            if (newView == null) newView = GameObject.Instantiate(Resources.Load<WeaponProjectileView>("Prefabs/WeaponProjectileView"));
             newView.WeaponProjectile = weaponProjectile;
             newView.transform.localPosition = weaponProjectile.Position;
             newView.transform.localRotation = weaponProjectile.Rotation;

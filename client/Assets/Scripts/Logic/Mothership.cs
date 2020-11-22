@@ -41,18 +41,18 @@ namespace Logic
         private bool initialSpawnCompleted;
 
         public DroneSpawnPointSettings Settings { get; private set; }
-        public Team Allegiance { get; private set; }
+        public Team Team { get; private set; }
         public Vector3 SpawnPosition { get; private set; }
 
-        public DroneSpawnPoint(DroneSpawnPointSettings settings, Team allegiance, Vector3 mothershipPosition)
-            => (Settings, Allegiance, SpawnPosition, timeUntilNextSpawn) = (settings, allegiance, mothershipPosition + settings.relativePosition, settings.initialSpawnTime);
+        public DroneSpawnPoint(DroneSpawnPointSettings settings, Team team, Vector3 mothershipPosition)
+            => (Settings, Team, SpawnPosition, timeUntilNextSpawn) = (settings, team, mothershipPosition + settings.relativePosition, settings.initialSpawnTime);
 
         public void Tick(float dT)
         {
             timeUntilNextSpawn -= dT;
             if (timeUntilNextSpawn <= 0 && (!initialSpawnCompleted || Settings.periodicSpawn))
             {
-                var drone = new Drone(Settings.droneType.GetSettings(), Allegiance, SpawnPosition);
+                var drone = new Drone(Settings.droneType.GetSettings(), Team, SpawnPosition);
                 GameController.Instance.AddDrone(drone);
                 initialSpawnCompleted = true;
                 timeUntilNextSpawn += Settings.spawnPeriod;

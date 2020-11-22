@@ -105,7 +105,7 @@ public class GameController : MonoBehaviour
         {
             var projectile = Projectiles[i];
             projectile.Tick(dT);
-            if (projectile.Time > 10 || projectile.Dead)
+            if (projectile.Dead)
             {
                 Projectiles.RemoveAt(i--);
                 continue;
@@ -119,7 +119,7 @@ public class GameController : MonoBehaviour
             for (var j = 0; j < Projectiles.Count; j++)
             {
                 var projectile = Projectiles[j];
-                if (fighter.TryCollideWith(projectile)) Projectiles.RemoveAt(j--);
+                if (fighter.TryCollideWith(projectile)) Projectiles[j].GetKilled(fighter);
             }
             if (fighter.Dead) Fighters.RemoveAt(i--);
         }
@@ -136,7 +136,7 @@ public class GameController : MonoBehaviour
             for (var j = 0; j < Projectiles.Count; j++)
             {
                 var projectile = Projectiles[j];
-                if (drone.TryCollideWith(projectile)) Projectiles.RemoveAt(j--);
+                if (drone.TryCollideWith(projectile)) Projectiles[j].GetKilled(drone);
             }
             if (drone.Dead) Drones.RemoveAt(i--);
         }
@@ -189,7 +189,7 @@ public class GameController : MonoBehaviour
         Drones.Add(drone);
     }
 
-    public Fighter GetNearestTarget(Vector3 position, Team allegiance)
+    public Fighter GetNearestTarget(Vector3 position, Team team)
     {
         var minDistance = float.MaxValue;
         var result = default(Fighter);

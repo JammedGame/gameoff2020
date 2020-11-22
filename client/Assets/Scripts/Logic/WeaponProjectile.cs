@@ -15,7 +15,6 @@ namespace Logic
         public Quaternion Rotation => state.rotation;
         public float CollisionScale => settings.collisionScale;
         public BattleObject Owner => owner;
-        public float Time => state.time;
         public bool Dead { get; private set; }
 
         public WeaponProjectile(BattleObject owner, float damage, Vector3 position, Quaternion rotation, Vector3 velocity) =>
@@ -31,6 +30,8 @@ namespace Logic
             state.position += state.velocity * dT;
             state.time += dT;
             state.velocity *= 1.01f; // todo: add some kind of initial-max speed thing?
+
+            if (state.time > 10) Dead = true;
         }
 
         public void GetKilled(object source)

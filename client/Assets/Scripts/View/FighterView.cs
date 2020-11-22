@@ -3,15 +3,19 @@ using Logic;
 
 namespace View
 {
-    public class FighterView : MonoBehaviour
+    public class FighterView : BattleView<FighterView>
     {
         public float smoothMovement = 0.8f;
 
         public Fighter Fighter { get; set; }
 
-        private void Start()
+        public static FighterView Create(Fighter fighter)
         {
-            transform.localPosition = Fighter.Position;
+            var newView = FetchFromPool();
+            if (newView == null) newView = GameObject.Instantiate(Resources.Load<FighterView>("Prefabs/FighterView"));
+            newView.Fighter = fighter;
+            newView.transform.localPosition = fighter.Position;
+            return newView;
         }
 
         private void Update()
