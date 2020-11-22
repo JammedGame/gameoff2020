@@ -18,6 +18,7 @@ namespace Logic
         {
             Settings = settings;
             Position = settings.position;
+            Rotation = Quaternion.Euler(settings.rotation);
             Team = settings.team;
             CurrentHealth = settings.maxHealth;
             Invulnerable = settings.invulnerable;

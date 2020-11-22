@@ -10,7 +10,8 @@ namespace Settings
     {
         private static GameSettings instance;
         public static GameSettings Instance {
-            get {
+            get
+            {
                 if (instance == null) instance = Resources.Load<GameSettings>("GameSettings");
                 return instance;
             }
@@ -57,8 +58,8 @@ namespace Settings
         {
             switch (allegiance)
             {
-                case Team.TeamOne: return Team.TeamTwo;
-                case Team.TeamTwo: return Team.TeamOne;
+                case Team.Blue: return Team.Red;
+                case Team.Red: return Team.Blue;
                 default: return Team.Neutral;
             }
         }

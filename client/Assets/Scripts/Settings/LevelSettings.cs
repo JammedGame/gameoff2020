@@ -50,6 +50,7 @@ namespace Settings
         public MothershipType type;
         public Team team;
         public Vector3 position;
+        public Vector3 rotation;
         public Vector3 rotationalVelocity;
         public List<DroneSpawnPointSettings> droneSpawnPointSettings;
         public bool invulnerable;

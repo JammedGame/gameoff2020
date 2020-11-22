@@ -29,8 +29,8 @@ namespace Communication
     public enum Team
     {
         Neutral = 0,
-        TeamOne = 1,
-        TeamTwo = 2,
+        Blue = 1,
+        Red = 2,
     }
 
 	[Serializable]
