@@ -62,6 +62,7 @@ namespace Settings
     {
         public DroneType droneType;
         public Vector3 relativePosition;
+        public Vector3 relativeRotation;
         public float initialSpawnTime;
         public bool periodicSpawn;
         public float spawnPeriod;
