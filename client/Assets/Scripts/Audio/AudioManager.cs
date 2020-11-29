@@ -80,10 +80,11 @@ namespace Audio
 
 			if (source == default) 
 			{
-				var obj = new GameObject($"{nameof(AudioSource)} {sourceList.Count + 1}");
+				var obj = new GameObject($"{nameof(AudioSource)}{sourceList.Count + 1}");
 				obj.transform.SetParent(transform);
 				source = obj.AddComponent<AudioSource>();
 				source.mute = settings.type == AudioType.Music ? !MusicEnabled : !SoundEnabled;
+				source.playOnAwake = false;
 				sourceList.Add(source);
 			}
 

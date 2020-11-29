@@ -15,14 +15,9 @@ namespace Audio
             PlayAudio(combatMusic);
         }
 
-        public void FadeInCombatMusic()
+        public void FadeCombatMusic(bool state)
         {
-            FadeAudio(combatMusic, 1, musicFadeDuration);
-        }
-
-        public void FadeOutCombatMusic()
-        {
-            FadeAudio(combatMusic, 0, musicFadeDuration);
+            FadeAudio(combatMusic, state ? 1 : 0, musicFadeDuration);
         }
     }
 }

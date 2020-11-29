@@ -57,6 +57,7 @@ namespace Logic
                 Rotation * Vector3.forward * Settings.projectileSpeed
             );
             GameController.Instance.AddProjectile(projectile);
+            GameController.Instance.SignalInCombat(target);
         }
     }
 }

@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Communication;
+using Audio;
 using UnityEngine;
 
 public class MainMenuController : MonoBehaviour
@@ -29,6 +27,8 @@ public class MainMenuController : MonoBehaviour
         #endif
 
         Cursor.SetCursor(Resources.Load<Texture2D>("Textures/CrosshairMove"), new Vector2(16f, 16f), CursorMode.Auto);
+
+        MoonshotAudioManager.Instance.StartMusic();
     }
 
     public void ClickStartGame()

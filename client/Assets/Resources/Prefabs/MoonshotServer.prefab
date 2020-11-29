@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6652609611905143284
+--- !u!1 &3745613546042848785
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1015189636799585776}
-  - component: {fileID: 6595888597327158287}
+  - component: {fileID: 3745613546042848791}
+  - component: {fileID: 3745613546042848784}
   m_Layer: 0
-  m_Name: MoonshotAudioManager
+  m_Name: MoonshotServer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1015189636799585776
+--- !u!4 &3745613546042848791
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6652609611905143284}
+  m_GameObject: {fileID: 3745613546042848785}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,26 +31,15 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6595888597327158287
+--- !u!114 &3745613546042848784
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6652609611905143284}
+  m_GameObject: {fileID: 3745613546042848785}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc9e5850743e19141ad5debe84489db3, type: 3}
+  m_Script: {fileID: 11500000, guid: b4fe811c2f31b34459d433dd44753002, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicFadeDuration: 1
-  ambientMusic:
-    type: 0
-    clip: {fileID: 8300000, guid: becba8e1d1ca0ea4f9bc20773694930a, type: 3}
-    defaultVolume: 1
-    limitBehaviour: 2
-  combatMusic:
-    type: 0
-    clip: {fileID: 8300000, guid: 96903055a997a164ebf1cbe82b9bf9c8, type: 3}
-    defaultVolume: 0
-    limitBehaviour: 2

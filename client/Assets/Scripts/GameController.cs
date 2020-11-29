@@ -27,9 +27,19 @@ public class GameController : MonoBehaviour
     public PlayerState PlayerState => player.State;
 
     private const float combatEndBuffer = 5f;
+    private float timeSinceLastCombatEvent;
     private bool inCombat;
-    private float timeSinceCombatStarted;
-    private float timeSinceCombatEnded;
+    private bool InCombat
+    {
+        get => inCombat;
+        set
+        {
+            if (value == inCombat || MoonshotAudioManager.Instance == null) return;
+
+            inCombat = value;
+            MoonshotAudioManager.Instance.FadeCombatMusic(value);
+        }
+    }
 
     private void Start()
     {
@@ -68,8 +78,7 @@ public class GameController : MonoBehaviour
 
         MoonshotServer.Instance.OnAuthoritativeStateRecieved += LoadAuthoritativeState;
 
-        // todo jole
-        // MoonshotAudioManager.Instance.StartMusic();
+        MoonshotAudioManager.Instance.StartMusic();
     }
 
     private void LoadAuthoritativeState(GlobalState state)
@@ -153,25 +162,8 @@ public class GameController : MonoBehaviour
         SendClientStateIfNecessary(dT);
         ViewController.UpdateViews(this);
 
-        if (currentInput.Shoot)
-        {
-            timeSinceCombatStarted += dT;
-            timeSinceCombatEnded = 0;
-            if (!inCombat)
-            {
-                inCombat = true;
-                MoonshotAudioManager.Instance.FadeInCombatMusic();
-            }
-        }
-        else
-        {
-            timeSinceCombatEnded += dT;
-            if (timeSinceCombatEnded >= combatEndBuffer && inCombat)
-            {
-                inCombat = false;
-                MoonshotAudioManager.Instance.FadeOutCombatMusic();
-            }
-        }
+        timeSinceLastCombatEvent += dT;
+        if (timeSinceLastCombatEvent >= combatEndBuffer) InCombat = false;
     }
 
     private void SendClientStateIfNecessary(float dT)
@@ -189,6 +181,8 @@ public class GameController : MonoBehaviour
     private void OnDestroy()
     {
         MoonshotServer.Instance.OnAuthoritativeStateRecieved -= LoadAuthoritativeState;
+
+        InCombat = false;
     }
 
     public Vector3 GetGravityAcceleration(Vector3 position)
@@ -232,5 +226,13 @@ public class GameController : MonoBehaviour
             }
         }
         return result;
+    }
+
+    public void SignalInCombat(Fighter fighter)
+    {
+        if (fighter != player) return;
+
+        timeSinceLastCombatEvent = 0;
+        InCombat = true;
     }
 }
