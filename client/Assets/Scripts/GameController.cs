@@ -4,6 +4,7 @@ using View;
 using Logic;
 using Settings;
 using System.Collections.Generic;
+using Audio;
 
 public class GameController : MonoBehaviour
 {
@@ -24,6 +25,11 @@ public class GameController : MonoBehaviour
 
     public GlobalState GlobalState { get; private set; }
     public PlayerState PlayerState => player.State;
+
+    private const float combatEndBuffer = 5f;
+    private bool inCombat;
+    private float timeSinceCombatStarted;
+    private float timeSinceCombatEnded;
 
     private void Start()
     {
@@ -61,6 +67,9 @@ public class GameController : MonoBehaviour
         Cursor.SetCursor(Resources.Load<Texture2D>("Textures/CrosshairMove"), new Vector2(16f, 16f), CursorMode.Auto);
 
         MoonshotServer.Instance.OnAuthoritativeStateRecieved += LoadAuthoritativeState;
+
+        // todo jole
+        // MoonshotAudioManager.Instance.StartMusic();
     }
 
     private void LoadAuthoritativeState(GlobalState state)
@@ -143,6 +152,26 @@ public class GameController : MonoBehaviour
 
         SendClientStateIfNecessary(dT);
         ViewController.UpdateViews(this);
+
+        if (currentInput.Shoot)
+        {
+            timeSinceCombatStarted += dT;
+            timeSinceCombatEnded = 0;
+            if (!inCombat)
+            {
+                inCombat = true;
+                MoonshotAudioManager.Instance.FadeInCombatMusic();
+            }
+        }
+        else
+        {
+            timeSinceCombatEnded += dT;
+            if (timeSinceCombatEnded >= combatEndBuffer && inCombat)
+            {
+                inCombat = false;
+                MoonshotAudioManager.Instance.FadeOutCombatMusic();
+            }
+        }
     }
 
     private void SendClientStateIfNecessary(float dT)
